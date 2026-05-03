@@ -1,9 +1,7 @@
 <?php
 /**
- * alap jelszo: AlapJelszo123
- * FS Access Portal - BIZTONSÁGOS ÉS JAVÍTOTT INDEX.PHP
- * Hibakeresés bekapcsolva, dinamikus jogosultság lekérés, jelszó hashelés,
- * ÉS a PM/DO cégek teljes szétválasztásának megtartása, + Fatal Error védelem.
+ * FS Access Portal - Teljesen javított INDEX.PHP
+ * Hibakeresés bekapcsolva az 500-as hiba (Internal Server Error) felderítéséhez!
  */
 
 // --- HIBAKERESÉS BEKAPCSOLÁSA ---
@@ -31,36 +29,16 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     exit;
 }
 
-// Munkamenet változók
+// Felhasználói adatok a munkamenetből (login.php állította be)
 $my_user_id = (int) ($_SESSION['user_id'] ?? 0);
-// Támogatja a régi és az új session név változót is
-$my_full_name = $_SESSION['full_name'] ?? $_SESSION['username'] ?? 'Ismeretlen Felhasználó';
+$my_full_name = $_SESSION['username'] ?? 'Ismeretlen Felhasználó';
 $current_user_id = $my_user_id; // Kompatibilitás miatt
 
-// --- DINAMIKUS JOGOSULTSÁG LEKÉRÉS ---
-// Megnézzük a PMK táblában, ha ott nem találja, megnézi a DO táblában
-$role = $_SESSION['role'] ?? 'user'; // Alapértelmezett fallback
-
-$stmt_role_pm = $pdo->prepare("SELECT igenylo_jog FROM igenylo WHERE igenylo_id = ?");
-if ($stmt_role_pm) {
-    $stmt_role_pm->execute([$my_user_id]);
-    $fetched_role = $stmt_role_pm->fetchColumn();
-} else {
-    $fetched_role = false;
-}
-
-if (!$fetched_role) {
-    $stmt_role_do = $pdo->prepare("SELECT igenylo_jog FROM igenylok_do WHERE igenylo_id = ?");
-    if ($stmt_role_do) {
-        $stmt_role_do->execute([$my_user_id]);
-        $fetched_role = $stmt_role_do->fetchColumn();
-    }
-}
-
-if ($fetched_role) {
-    $role = trim($fetched_role);
-    $_SESSION['role'] = $role; // Session frissítése
-}
+// Friss jogosultság lekérése minden oldalbetöltésnél az 'igenylo' táblából
+$stmt_role = $pdo->prepare("SELECT igenylo_jog FROM igenylo WHERE igenylo_ID = ?");
+$stmt_role->execute([$my_user_id]);
+$role = $stmt_role->fetchColumn() ?: 'user';
+$role = trim($role);
 
 $message = '';
 $message_type = '';
@@ -98,11 +76,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
 
         if (!empty($selected_indices)) {
             $isDO = (strpos($company, 'DewertOkin') !== false);
-            $tbl_req = $isDO ? 'kerelem_do' : 'kerelem';
-            $tbl_folder = $isDO ? 'megosztasok_do' : 'megosztasok';
-            $tbl_user = $isDO ? 'igenylok_do' : 'igenylo';
+            $tbl_req = $isDO ? 'Kerelem_DO' : 'Kerelem';
+            $tbl_folder = $isDO ? 'Megosztasok_DO' : 'Megosztasok';
+            $tbl_user = $isDO ? 'Igenylok_DO' : 'igenylo';
 
-            $new_requests_to_notify = [];
+            $new_requests_to_notify = []; // Ebbe gyűjtjük az értesítendő felelősöket
 
             foreach ($selected_indices as $idx) {
                 $f_data = json_decode($folder_data_list[$idx], true);
@@ -113,18 +91,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
                 $type_name = ($req_right == 'rw' && !empty($f_data['rw'])) ? 'írás' : 'olvasás';
 
                 if ($final_id) {
-                    $stmt = $pdo->prepare("INSERT INTO $tbl_req (igenylo_id, megosztas_id, indoklas, hozzaferes_tipusa, kerelem_datum, status) VALUES (?,?,?,?,NOW(), 'pending')");
+                    $stmt = $pdo->prepare("INSERT INTO $tbl_req (igenylo_ID, megosztas_ID, indoklas, hozzaferes_tipusa, kerelem_datum, status) VALUES (?,?,?,?,NOW(), 'pending')");
                     $stmt->execute([$my_user_id, $final_id, $reason, $type_name]);
 
                     $inserted_req_id = $pdo->lastInsertId();
 
-                    $own_stmt = $pdo->prepare("SELECT i.igenylo_nev, i.igenylo_email, m.megosztas_neve FROM $tbl_folder m JOIN $tbl_user i ON m.felelos_id = i.igenylo_id WHERE m.megosztas_id = ?");
+                    // --- FELELŐS KERESÉSE AZ E-MAIL KÜLDÉSHEZ ---
+                    $own_stmt = $pdo->prepare("SELECT i.igenylo_nev, i.igenylo_email, m.megosztas_neve FROM $tbl_folder m JOIN $tbl_user i ON m.felelos_ID = i.igenylo_ID WHERE m.megosztas_ID = ?");
                     $own_stmt->execute([$final_id]);
                     $owner_data = $own_stmt->fetch(PDO::FETCH_ASSOC);
 
                     if ($owner_data && !empty($owner_data['igenylo_email'])) {
                         $o_email = trim($owner_data['igenylo_email']);
 
+                        // Csoportosítjuk a felelős e-mail címe alapján
                         if (!isset($new_requests_to_notify[$o_email])) {
                             $new_requests_to_notify[$o_email] = [
                                     'owner_name' => $owner_data['igenylo_nev'],
@@ -143,6 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
                 }
             }
 
+            // Ticket.php hívása
             if (!empty($new_requests_to_notify)) {
                 $emails_sent_count = 0;
                 $email_send_errors = [];
@@ -179,36 +160,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
         if (!empty($raw_ids)) {
             foreach ($raw_ids as $val) {
                 list($id, $src) = explode('|', $val);
-                $tbl = ($src == 'DO') ? 'kerelem_do' : 'kerelem';
-                $tbl_folder = ($src == 'DO') ? 'megosztasok_do' : 'megosztasok';
-                $tbl_user = ($src == 'DO') ? 'igenylok_do' : 'igenylo';
+                $tbl = ($src == 'DO') ? 'Kerelem_DO' : 'Kerelem';
+                $tbl_folder = ($src == 'DO') ? 'Megosztasok_DO' : 'Megosztasok';
+                $tbl_user = ($src == 'DO') ? 'Igenylok_DO' : 'igenylo';
 
-                $check_stmt = $pdo->prepare("SELECT k.igenylo_id, m.felelos_id, m.megosztas_neve, i.igenylo_nev, i.igenylo_email 
+                $check_stmt = $pdo->prepare("SELECT k.igenylo_ID, m.felelos_ID, m.megosztas_neve, i.igenylo_nev, i.igenylo_email 
                                              FROM $tbl k 
-                                             JOIN $tbl_folder m ON k.megosztas_id = m.megosztas_id 
-                                             JOIN $tbl_user i ON k.igenylo_id = i.igenylo_id 
-                                             WHERE k.kerelem_id = ?");
+                                             JOIN $tbl_folder m ON k.megosztas_ID = m.megosztas_ID 
+                                             JOIN $tbl_user i ON k.igenylo_ID = i.igenylo_ID 
+                                             WHERE k.kerelem_ID = ?");
                 $check_stmt->execute([$id]);
                 $req_info = $check_stmt->fetch(PDO::FETCH_ASSOC);
 
-                if (!$req_info) continue;
+                if (!$req_info) {
+                    continue;
+                }
 
-                if ($req_info['igenylo_id'] == $my_user_id) {
+                if ($req_info['igenylo_ID'] == $my_user_id) {
                     $error_msgs[] = "A(z) $id. számú igényt nem bírálhatod el, mert a sajátod!";
                     continue;
                 }
 
-                if ($req_info['felelos_id'] != $my_user_id && !in_array(strtolower($role), ['it_admin'])) {
+                if ($req_info['felelos_ID'] != $my_user_id && !in_array(strtolower($role), ['it_admin'])) {
                     $error_msgs[] = "A(z) $id. számú igényt nem bírálhatod el, mert másodlagos felelősként nincs admin jogod!";
                     continue;
                 }
 
                 $status = ($action == 'approve') ? 'accepted' : ($action == 'reject' ? 'rejected' : 'revoke');
-                $pdo->prepare("UPDATE $tbl SET status=? WHERE kerelem_id=?")->execute([$status, $id]);
+                $pdo->prepare("UPDATE $tbl SET status=? WHERE kerelem_ID=?")->execute([$status, $id]);
 
                 $admin_note = isset($comments[$id]) ? trim($comments[$id]) : null;
 
-                $pdo->prepare("INSERT INTO Biralat (kerelem_id, admin_id, rendszer, dontes, admin_comment, datum, email_sent) VALUES (?,?,?,?,?,NOW(), 0)")
+                $pdo->prepare("INSERT INTO Biralat (kerelem_ID, admin_ID, rendszer, dontes, admin_comment, datum, email_sent) VALUES (?,?,?,?,?,NOW(), 0)")
                         ->execute([$id, $my_user_id, $src, $action, $admin_note]);
 
                 $processed_requests[] = [
@@ -225,11 +208,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
 
             if ($success_cnt > 0) {
                 $_POST['processed_requests'] = $processed_requests;
-
                 if (file_exists('ticket.php')) {
                     include 'ticket.php';
                 }
-
                 $message = "✅ $success_cnt db művelet sikeresen végrehajtva. (Értesítés elküldve az igénylőnek)";
                 $message_type = "success";
             }
@@ -250,18 +231,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
         $create_rw = isset($_POST['create_rw']);
 
         if ($sys && $base_name && $area_id && $owner_id && ($create_ro || $create_rw)) {
-            $tbl_folder = ($sys == 'DO') ? 'megosztasok_do' : 'megosztasok';
+            $tbl_folder = ($sys == 'DO') ? 'Megosztasok_DO' : 'Megosztasok';
             $inserted = 0;
             try {
                 if ($create_ro) {
                     $name = $base_name . '_RO';
-                    $stmt = $pdo->prepare("INSERT INTO $tbl_folder (megosztas_neve, terulet_id, felelos_id, masodlagos_felelos_id) VALUES (?,?,?,?)");
+                    $stmt = $pdo->prepare("INSERT INTO $tbl_folder (megosztas_neve, terulet_ID, felelos_ID, masodlagos_felelos_ID) VALUES (?,?,?,?)");
                     $stmt->execute([$name, $area_id, $owner_id, $sec_owner_id]);
                     $inserted++;
                 }
                 if ($create_rw) {
                     $name = $base_name . '_RW';
-                    $stmt = $pdo->prepare("INSERT INTO $tbl_folder (megosztas_neve, terulet_id, felelos_id, masodlagos_felelos_id) VALUES (?,?,?,?)");
+                    $stmt = $pdo->prepare("INSERT INTO $tbl_folder (megosztas_neve, terulet_ID, felelos_ID, masodlagos_felelos_ID) VALUES (?,?,?,?)");
                     $stmt->execute([$name, $area_id, $owner_id, $sec_owner_id]);
                     $inserted++;
                 }
@@ -285,14 +266,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
         $sec_owner_id = !empty($_POST['db_sec_owner_id']) ? $_POST['db_sec_owner_id'] : null;
 
         if ($sys && $exact_name && $area_id && $owner_id) {
-            $tbl_folder = ($sys == 'DO') ? 'megosztasok_do' : 'megosztasok';
+            $tbl_folder = ($sys == 'DO') ? 'Megosztasok_DO' : 'Megosztasok';
             try {
-                $stmt = $pdo->prepare("INSERT INTO $tbl_folder (megosztas_neve, terulet_id, felelos_id, masodlagos_felelos_id) VALUES (?,?,?,?)");
+                $stmt = $pdo->prepare("INSERT INTO $tbl_folder (megosztas_neve, terulet_ID, felelos_ID, masodlagos_felelos_ID) VALUES (?,?,?,?)");
                 $stmt->execute([$exact_name, $area_id, $owner_id, $sec_owner_id]);
                 $message = "✅ Új adatbázis rekord sikeresen rögzítve: $exact_name ($sys)";
                 $message_type = "success";
+
                 $search_term = '';
                 $_GET['search'] = '';
+
             } catch (Exception $e) {
                 $message = "DB Hiba: " . $e->getMessage();
                 $message_type = "error";
@@ -310,9 +293,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
         $new_sec = !empty($_POST['new_sec']) ? $_POST['new_sec'] : null;
 
         if ($f_id && $f_sys && $new_owner) {
-            $tbl_folder = ($f_sys == 'DO') ? 'megosztasok_do' : 'megosztasok';
+            $tbl_folder = ($f_sys == 'DO') ? 'Megosztasok_DO' : 'Megosztasok';
             try {
-                $stmt = $pdo->prepare("UPDATE $tbl_folder SET felelos_id = ?, masodlagos_felelos_id = ? WHERE megosztas_id = ?");
+                $stmt = $pdo->prepare("UPDATE $tbl_folder SET felelos_ID = ?, masodlagos_felelos_ID = ? WHERE megosztas_ID = ?");
                 $stmt->execute([$new_owner, $new_sec, $f_id]);
                 $message = "✅ Mappa ($f_id) felelősei sikeresen frissítve!";
                 $message_type = "success";
@@ -328,9 +311,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
         $del_sys = $_POST['del_sys'] ?? '';
 
         if ($del_id && $del_sys) {
-            $tbl_folder = ($del_sys == 'DO') ? 'megosztasok_do' : 'megosztasok';
+            $tbl_folder = ($del_sys == 'DO') ? 'Megosztasok_DO' : 'Megosztasok';
             try {
-                $stmt = $pdo->prepare("DELETE FROM $tbl_folder WHERE megosztas_id = ?");
+                $stmt = $pdo->prepare("DELETE FROM $tbl_folder WHERE megosztas_ID = ?");
                 $stmt->execute([$del_id]);
                 $message = "✅ Mappa (ID: $del_id) sikeresen törölve!";
                 $message_type = "success";
@@ -344,7 +327,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
     elseif (($action == 'update_user_role' || $action == 'add_new_user') && $role === 'it_admin') {
         if ($action == 'update_user_role') {
             $target_user_id = $_POST['target_user_id'] ?? 0;
-            $target_sys = $_POST['target_sys'] ?? 'PM';
             $new_role = $_POST['new_role'] ?? 'user';
 
             if ($target_user_id && in_array($new_role, ['user', 'mappa_felelos', 'masodlagos_felelos', 'it_admin'])) {
@@ -352,10 +334,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
                     $message = "⚠️ Saját magad IT Admin jogát nem veheted el ezen a felületen!";
                     $message_type = "warning";
                 } else {
-                    $tbl = ($target_sys === 'DO') ? 'igenylok_do' : 'igenylo';
-                    $stmt = $pdo->prepare("UPDATE $tbl SET igenylo_jog = ? WHERE igenylo_id = ?");
+                    $stmt = $pdo->prepare("UPDATE igenylo SET igenylo_jog = ? WHERE igenylo_ID = ?");
                     $stmt->execute([$new_role, $target_user_id]);
-                    $message = "✅ Felhasználó jogosultsága frissítve ($target_sys)!";
+                    $message = "✅ Felhasználó jogosultsága frissítve!";
                     $message_type = "success";
                 }
             }
@@ -363,25 +344,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
             $u_name = trim($_POST['u_name'] ?? '');
             $u_email = trim($_POST['u_email'] ?? '');
             $u_role = $_POST['u_role'] ?? 'user';
-            $u_comp = $_POST['u_company'] ?? 'PM';
-
-            // JELSZÓ HASHELÉS BEÉPÍTVE
             $default_password = password_hash('AlapJelszo123', PASSWORD_DEFAULT);
 
             if ($u_name) {
-                $tbl = ($u_comp === 'DO') ? 'igenylok_do' : 'igenylo';
-                $check = $pdo->prepare("SELECT igenylo_id FROM $tbl WHERE igenylo_nev = ?");
+                $check = $pdo->prepare("SELECT igenylo_ID FROM igenylo WHERE igenylo_nev = ?");
                 $check->execute([$u_name]);
-
                 if ($check->rowCount() > 0) {
-                    $message = "⚠️ Ilyen nevű felhasználó már létezik ebben a cégben ($u_comp)!";
+                    $message = "⚠️ Ilyen nevű felhasználó már létezik!";
                     $message_type = "error";
                 } else {
-                    $sql_insert = "INSERT INTO $tbl (igenylo_nev, igenylo_email, igenylo_jog, igenylo_password) VALUES (?, ?, ?, ?)";
+                    $sql_insert = "INSERT INTO igenylo (igenylo_nev, igenylo_email, igenylo_jog, igenylo_password) VALUES (?, ?, ?, ?)";
                     $stmt = $pdo->prepare($sql_insert);
                     try {
                         $stmt->execute([$u_name, $u_email, $u_role, $default_password]);
-                        $message = "✅ Új felhasználó sikeresen hozzáadva: $u_name ($u_comp) - Jelszó: AlapJelszo123";
+                        $message = "✅ Új felhasználó sikeresen hozzáadva: $u_name (Jelszó: AlapJelszo123)";
                         $message_type = "success";
                     } catch (Exception $e) {
                         $message = "Adatbázis hiba: " . $e->getMessage();
@@ -401,10 +377,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
         $users_to_revoke = $_POST['revoke_users'] ?? [];
 
         if ($rev_sys && $rev_folder_id) {
-            $tbl_req = ($rev_sys == 'DO') ? 'kerelem_do' : 'kerelem';
-            $tbl_folder = ($rev_sys == 'DO') ? 'megosztasok_do' : 'megosztasok';
+            $tbl_req = ($rev_sys == 'DO') ? 'Kerelem_DO' : 'Kerelem';
+            $tbl_folder = ($rev_sys == 'DO') ? 'Megosztasok_DO' : 'Megosztasok';
 
-            $check_sql = "SELECT felelos_id FROM $tbl_folder WHERE megosztas_id = ?";
+            $check_sql = "SELECT felelos_ID FROM $tbl_folder WHERE megosztas_ID = ?";
             $stmt_check = $pdo->prepare($check_sql);
             $stmt_check->execute([$rev_folder_id]);
             $real_felelos_id = $stmt_check->fetchColumn();
@@ -420,10 +396,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
 
                 if (!empty($users_to_revoke)) {
                     foreach ($users_to_revoke as $req_id) {
-                        $stmt = $pdo->prepare("UPDATE $tbl_req SET status = 'revoke' WHERE kerelem_id = ?");
+                        $stmt = $pdo->prepare("UPDATE $tbl_req SET status = 'revoke' WHERE kerelem_ID = ?");
                         $stmt->execute([$req_id]);
 
-                        $pdo->prepare("INSERT INTO Biralat (kerelem_id, admin_id, rendszer, dontes, admin_comment, datum, email_sent) VALUES (?, ?, ?, 'review_revoke', 'Időszakos felülvizsgálat során megvonva', NOW(), 0)")
+                        $pdo->prepare("INSERT INTO Biralat (kerelem_ID, admin_ID, rendszer, dontes, admin_comment, datum, email_sent) VALUES (?, ?, ?, 'review_revoke', 'Időszakos felülvizsgálat során megvonva', NOW(), 0)")
                                 ->execute([$req_id, $my_user_id, $rev_sys]);
 
                         $revoked_ids_for_ticket[] = $req_id . '|' . $rev_sys;
@@ -446,7 +422,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
                     }
                 }
 
-                $stmt = $pdo->prepare("UPDATE $tbl_folder SET utolso_ellenorzes_datum = NOW() WHERE megosztas_id = ?");
+                $stmt = $pdo->prepare("UPDATE $tbl_folder SET utolso_ellenorzes_datum = NOW() WHERE megosztas_ID = ?");
                 $stmt->execute([$rev_folder_id]);
 
                 $message = "✅ Felülvizsgálat rögzítve! $revoked_count jogosultság megvonva, értesítések elküldve.";
@@ -460,8 +436,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
 
         $sql_remind = "
             SELECT m.megosztas_neve, i.igenylo_nev, i.igenylo_email, 'PM' as rendszer 
-            FROM megosztasok m 
-            JOIN igenylo i ON m.felelos_id = i.igenylo_id 
+            FROM Megosztasok m 
+            JOIN igenylo i ON m.felelos_ID = i.igenylo_ID 
             WHERE (m.utolso_ellenorzes_datum IS NULL OR m.utolso_ellenorzes_datum < '$year_ago')
             AND i.igenylo_email IS NOT NULL AND i.igenylo_email != ''
             AND i.igenylo_jog = 'mappa_felelos'
@@ -469,41 +445,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
             UNION ALL
             
             SELECT m.megosztas_neve, i.igenylo_nev, i.igenylo_email, 'DO' as rendszer 
-            FROM megosztasok_do m 
-            JOIN igenylok_do i ON m.felelos_id = i.igenylo_id 
+            FROM Megosztasok_DO m 
+            JOIN Igenylok_DO i ON m.felelos_ID = i.igenylo_ID 
             WHERE (m.utolso_ellenorzes_datum IS NULL OR m.utolso_ellenorzes_datum < '$year_ago')
             AND i.igenylo_email IS NOT NULL AND i.igenylo_email != ''
         ";
 
         $stmt = $pdo->query($sql_remind);
-        if ($stmt) {
-            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $reminder_tasks = [];
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            foreach ($rows as $r) {
-                $email = trim($r['igenylo_email']);
-                if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) continue;
+        $reminder_tasks = [];
 
-                if (!isset($reminder_tasks[$email])) {
-                    $reminder_tasks[$email] = [
-                            'name' => $r['igenylo_nev'],
-                            'folders' => []
-                    ];
-                }
-                $reminder_tasks[$email]['folders'][] = $r['megosztas_neve'] . " (" . $r['rendszer'] . ")";
+        foreach ($rows as $r) {
+            $email = trim($r['igenylo_email']);
+            if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                continue;
             }
 
-            if (!empty($reminder_tasks)) {
-                if (file_exists('ticket.php')) {
-                    include 'ticket.php';
-                }
-                $sent_count = count($reminder_tasks);
-                $message = "✅ Emlékeztetők feldolgozva és átadva a levelezőnek! Összesen $sent_count fő felelős kapott értesítést.";
-                $message_type = "success";
-            } else {
-                $message = "ℹ️ Nincs kiküldendő emlékeztető (minden mappa rendben van, vagy nincs megfelelő jogosultság/email).";
-                $message_type = "warning";
+            if (!isset($reminder_tasks[$email])) {
+                $reminder_tasks[$email] = [
+                        'name' => $r['igenylo_nev'],
+                        'folders' => []
+                ];
             }
+            $reminder_tasks[$email]['folders'][] = $r['megosztas_neve'] . " (" . $r['rendszer'] . ")";
+        }
+
+        if (!empty($reminder_tasks)) {
+            if (file_exists('ticket.php')) {
+                include 'ticket.php';
+            }
+
+            $sent_count = count($reminder_tasks);
+            $message = "✅ Emlékeztetők feldolgozva és átadva a levelezőnek! Összesen $sent_count fő felelős kapott értesítést.";
+            $message_type = "success";
+        } else {
+            $message = "ℹ️ Nincs kiküldendő emlékeztető (minden mappa rendben van, vagy nincs megfelelő jogosultság/email).";
+            $message_type = "warning";
         }
     }
 }
@@ -513,48 +491,44 @@ $all_areas = ['PM' => [], 'DO' => []];
 $all_users = ['PM' => [], 'DO' => []];
 
 if (strtolower($role) === 'it_admin') {
-    $stmt1 = $pdo->query("SELECT terulet_id, terulet_nev FROM Terulet ORDER BY terulet_nev");
-    if($stmt1) $all_areas['PM'] = $stmt1->fetchAll();
+    $stmt = $pdo->query("SELECT terulet_ID, terulet_nev FROM Terulet ORDER BY terulet_nev");
+    $all_areas['PM'] = $stmt->fetchAll();
+    $stmt = $pdo->query("SELECT terulet_ID, terulet_nev FROM Terulet_DO ORDER BY terulet_nev");
+    $all_areas['DO'] = $stmt->fetchAll();
 
-    $stmt2 = $pdo->query("SELECT terulet_id, terulet_nev FROM Terulet_DO ORDER BY terulet_nev");
-    if($stmt2) $all_areas['DO'] = $stmt2->fetchAll();
-
-    $stmt3 = $pdo->query("SELECT igenylo_id, igenylo_nev, terulet_id FROM igenylo ORDER BY igenylo_nev");
-    if($stmt3) $all_users['PM'] = $stmt3->fetchAll();
-
-    $stmt4 = $pdo->query("SELECT igenylo_id, igenylo_nev, terulet_id FROM igenylok_do ORDER BY igenylo_nev");
-    if($stmt4) $all_users['DO'] = $stmt4->fetchAll();
+    $stmt = $pdo->query("SELECT igenylo_ID, igenylo_nev, terulet_ID FROM igenylo ORDER BY igenylo_nev");
+    $all_users['PM'] = $stmt->fetchAll();
+    $stmt = $pdo->query("SELECT igenylo_ID, igenylo_nev, terulet_ID FROM Igenylok_DO ORDER BY igenylo_nev");
+    $all_users['DO'] = $stmt->fetchAll();
 }
 
 // --- MAPPA STRUKTÚRA BETÖLTÉSE ---
 $folders_by_dept = [];
-$stmt = $pdo->query("(SELECT 'PM' as src, t.terulet_nev, m.megosztas_neve, m.megosztas_id FROM megosztasok m JOIN Terulet t ON m.terulet_id = t.terulet_id)
+$stmt = $pdo->query("(SELECT 'PM' as src, t.terulet_nev, m.megosztas_neve, m.megosztas_ID FROM Megosztasok m JOIN Terulet t ON m.terulet_id = t.terulet_id)
                       UNION ALL
-                      (SELECT 'DO' as src, t.terulet_nev, m.megosztas_neve, m.megosztas_id FROM megosztasok_do m JOIN Terulet_DO t ON m.terulet_id = t.terulet_id)");
+                      (SELECT 'DO' as src, t.terulet_nev, m.megosztas_neve, m.megosztas_ID FROM Megosztasok_DO m JOIN Terulet_DO t ON m.terulet_id = t.terulet_id)");
 
-if ($stmt) {
-    while ($r = $stmt->fetch()) {
-        $comp = ($r['src'] == 'PM') ? 'Phoenix Mecano Kecskemét Kft.' : 'DewertOkin Kft.';
-        $terulet_nev = trim($r['terulet_nev']);
-        $is_ro = (substr($r['megosztas_neve'], -3) === '_RO');
-        $is_rw = (substr($r['megosztas_neve'], -3) === '_RW');
+while ($r = $stmt->fetch()) {
+    $comp = ($r['src'] == 'PM') ? 'Phoenix Mecano Kecskemét Kft.' : 'DewertOkin Kft.';
+    $terulet_nev = trim($r['terulet_nev']);
+    $is_ro = (substr($r['megosztas_neve'], -3) === '_RO');
+    $is_rw = (substr($r['megosztas_neve'], -3) === '_RW');
 
-        if ($is_ro || $is_rw) {
-            $base = substr($r['megosztas_neve'], 0, -3);
-            if (!isset($folders_by_dept[$comp][$terulet_nev][$base])) {
-                $folders_by_dept[$comp][$terulet_nev][$base] = ['ro' => null, 'rw' => null];
-            }
-            if ($is_ro)
-                $folders_by_dept[$comp][$terulet_nev][$base]['ro'] = $r['megosztas_id'];
-            if ($is_rw)
-                $folders_by_dept[$comp][$terulet_nev][$base]['rw'] = $r['megosztas_id'];
-        } else {
-            $base = $r['megosztas_neve'];
-            if (!isset($folders_by_dept[$comp][$terulet_nev][$base])) {
-                $folders_by_dept[$comp][$terulet_nev][$base] = ['ro' => null, 'rw' => null];
-            }
-            $folders_by_dept[$comp][$terulet_nev][$base]['ro'] = $r['megosztas_id'];
+    if ($is_ro || $is_rw) {
+        $base = substr($r['megosztas_neve'], 0, -3);
+        if (!isset($folders_by_dept[$comp][$terulet_nev][$base])) {
+            $folders_by_dept[$comp][$terulet_nev][$base] = ['ro' => null, 'rw' => null];
         }
+        if ($is_ro)
+            $folders_by_dept[$comp][$terulet_nev][$base]['ro'] = $r['megosztas_ID'];
+        if ($is_rw)
+            $folders_by_dept[$comp][$terulet_nev][$base]['rw'] = $r['megosztas_ID'];
+    } else {
+        $base = $r['megosztas_neve'];
+        if (!isset($folders_by_dept[$comp][$terulet_nev][$base])) {
+            $folders_by_dept[$comp][$terulet_nev][$base] = ['ro' => null, 'rw' => null];
+        }
+        $folders_by_dept[$comp][$terulet_nev][$base]['ro'] = $r['megosztas_ID'];
     }
 }
 ?>
@@ -565,7 +539,6 @@ if ($stmt) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FS Access Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="mage/png" href="FSAA.jpg">
     <style>
         :root { --primary: #003C71; --accent: #EF3340; --bg: #F3F4F6; --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
         body { font-family: 'Inter', sans-serif; margin: 0; display: flex; height: 100vh; background: var(--bg); color: #111827; }
@@ -623,10 +596,6 @@ if ($stmt) {
 
         optgroup { font-weight: 700; color: #003C71; background-color: #F3F4F6; }
         optgroup option { font-weight: 400; color: #111827; background-color: white; }
-        .logo-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; padding: 0 10px; height: 60px;}
-        .logo-container .logo-wrapper { flex: 1; display: flex; justify-content: center; align-items: center;}
-        .logo-pm { height: 38px; width: auto;}
-        .logo-do { height: 46px; width: auto;}
     </style>
 </head>
 <body>
@@ -684,15 +653,6 @@ if ($stmt) {
                 <h3 style="margin-top:0;">Új felhasználó hozzáadása</h3>
                 <form method="post" style="display:flex; gap:15px; align-items:flex-end; flex-wrap:wrap;">
                     <input type="hidden" name="action" value="add_new_user">
-
-                    <div style="flex:1; min-width:100px;">
-                        <label>Cég</label>
-                        <select name="u_company" style="margin-bottom:0;" required>
-                            <option value="PM">PMK</option>
-                            <option value="DO">DO</option>
-                        </select>
-                    </div>
-
                     <div style="flex:2; min-width:200px;"><label>Teljes Név</label><input type="text" name="u_name" required style="margin-bottom:0;"></div>
                     <div style="flex:2; min-width:200px;"><label>Email cím (Opcionális)</label><input type="text" name="u_email" style="margin-bottom:0;"></div>
                     <div style="flex:1; min-width:150px;">
@@ -709,16 +669,8 @@ if ($stmt) {
             </div>
 
             <?php
-            $usr_filter_pm = $search_term ? "WHERE igenylo_nev LIKE " . $pdo->quote('%' . $search_term . '%') : "";
-            $usr_filter_do = $search_term ? "WHERE igenylo_nev LIKE " . $pdo->quote('%' . $search_term . '%') : "";
-
-            $sql_users = "
-                    SELECT igenylo_id, igenylo_nev, igenylo_email, igenylo_jog, 'PM' AS rendszer FROM igenylo $usr_filter_pm
-                    UNION ALL
-                    SELECT igenylo_id, igenylo_nev, igenylo_email, igenylo_jog, 'DO' AS rendszer FROM igenylok_do $usr_filter_do
-                    ORDER BY igenylo_nev ASC
-                ";
-            $stmt_users = $pdo->query($sql_users);
+            $usr_filter = $search_term ? "WHERE igenylo_nev LIKE " . $pdo->quote('%' . $search_term . '%') : "";
+            $stmt_users = $pdo->query("SELECT * FROM igenylo $usr_filter ORDER BY igenylo_nev ASC");
             ?>
             <div class="search-container">
                 <form method="get" style="display:flex; gap:10px; width:100%; align-items:center; margin:0;">
@@ -727,16 +679,11 @@ if ($stmt) {
                     <button type="submit" class="search-btn">Keresés</button>
                 </form>
             </div>
-
-            <?php if ($stmt_users === false): ?>
-            <?php $err = $pdo->errorInfo(); ?>
-            <div class="msg-box msg-error"><b>Adatbázis hiba (Felhasználók listázása):</b> <?= htmlspecialchars($err[2] ?? 'Ismeretlen SQL hiba') ?></div>
-        <?php else: ?>
             <div class="card">
-                <h3>Regisztrált Felhasználók</h3>
+                <h3>Regisztrált Felhasználók (PMK)</h3>
                 <div class="table-wrapper">
                     <table>
-                        <thead><tr><th>Cég</th><th>ID</th><th>Név</th><th>Email</th><th>Jog</th><th>Művelet</th></tr></thead>
+                        <thead><tr><th>ID</th><th>Név</th><th>Email</th><th>Jog</th><th>Művelet</th></tr></thead>
                         <tbody>
                         <?php while ($u = $stmt_users->fetch(PDO::FETCH_ASSOC)):
                             $current_role = $u['igenylo_jog'] ?? 'user';
@@ -746,15 +693,12 @@ if ($stmt) {
                             elseif ($current_role == 'masodlagos_felelos') $bg = '#6B7280';
                             ?>
                             <tr>
-                                <td><span class="status-badge" style="background: <?= $u['rendszer'] == 'PM' ? '#003C71' : '#EF3340' ?>; color: white;"><?= $u['rendszer'] ?></span></td>
-                                <td><?= $u['igenylo_id'] ?></td>
+                                <td><?= $u['igenylo_ID'] ?></td>
                                 <td><b><?= htmlspecialchars($u['igenylo_nev']) ?></b></td>
                                 <td><?= htmlspecialchars($u['igenylo_email'] ?? '-') ?></td>
                                 <form method="post">
                                     <input type="hidden" name="action" value="update_user_role">
-                                    <input type="hidden" name="target_user_id" value="<?= $u['igenylo_id'] ?>">
-                                    <input type="hidden" name="target_sys" value="<?= $u['rendszer'] ?>">
-
+                                    <input type="hidden" name="target_user_id" value="<?= $u['igenylo_ID'] ?>">
                                     <td>
                                         <select name="new_role" style="margin:0; height:auto; padding:6px; font-size:0.85rem; border:2px solid <?= $bg ?>; font-weight:bold;">
                                             <option value="user" <?= $current_role == 'user' ? 'selected' : '' ?>>User</option>
@@ -771,7 +715,6 @@ if ($stmt) {
                     </table>
                 </div>
             </div>
-        <?php endif; ?>
 
         <?php elseif ($page == 'uj_mappa' && $role === 'it_admin'): ?>
             <div class="card" style="max-width: 700px; margin: 0 auto;">
@@ -808,9 +751,7 @@ if ($stmt) {
                     const areaSel = document.getElementById('areaSelect');
                     areaSel.innerHTML = '<option value="">-- Válassz --</option>';
                     if (sys && areas[sys]) {
-                        areas[sys].forEach(a => {
-                            areaSel.innerHTML += `<option value="${a.terulet_id}">${a.terulet_nev}</option>`;
-                        });
+                        areas[sys].forEach(a => { areaSel.innerHTML += `<option value="${a.terulet_ID}">${a.terulet_nev}</option>`; });
                     }
                     updateOwners();
                 }
@@ -820,29 +761,25 @@ if ($stmt) {
                     const areaId = document.getElementById('areaSelect').value;
                     const ownerSel = document.getElementById('ownerSelect');
                     const secOwnerSel = document.getElementById('secOwnerSelect');
-
                     ownerSel.innerHTML = '<option value="">-- Válassz --</option>';
                     secOwnerSel.innerHTML = '<option value="">-- Nincs --</option>';
 
                     if (sys && users[sys]) {
-                        let primaryUsers = [];
-                        let otherUsers = [];
-
+                        let primaryUsers = []; let otherUsers = [];
                         users[sys].forEach(u => {
-                            if (areaId && u.terulet_id == areaId) primaryUsers.push(u);
+                            if (areaId && u.terulet_ID == areaId) primaryUsers.push(u);
                             else otherUsers.push(u);
                         });
 
                         if (primaryUsers.length > 0) {
                             let optGroup = '<optgroup label="Adott terület felhasználói">';
-                            primaryUsers.forEach(u => optGroup += `<option value="${u.igenylo_id}">${u.igenylo_nev}</option>`);
+                            primaryUsers.forEach(u => optGroup += `<option value="${u.igenylo_ID}">${u.igenylo_nev}</option>`);
                             optGroup += '</optgroup>';
                             ownerSel.innerHTML += optGroup; secOwnerSel.innerHTML += optGroup;
                         }
-
                         if (otherUsers.length > 0) {
                             let optGroup = '<optgroup label="Többi felhasználó">';
-                            otherUsers.forEach(u => optGroup += `<option value="${u.igenylo_id}">${u.igenylo_nev}</option>`);
+                            otherUsers.forEach(u => optGroup += `<option value="${u.igenylo_ID}">${u.igenylo_nev}</option>`);
                             optGroup += '</optgroup>';
                             ownerSel.innerHTML += optGroup; secOwnerSel.innerHTML += optGroup;
                         }
@@ -852,9 +789,9 @@ if ($stmt) {
 
         <?php elseif ($page == 'igenyles'): ?>
             <div class="card" style="max-width: 700px; margin: 0 auto;">
-                <div class="logo-container">
-                    <div class="logo-wrapper"><img src="pm_logo.png" class="logo-pm" alt="PM"></div>
-                    <div class="logo-wrapper"><img src="do_logo.jpg" class="logo-do" alt="DO"></div>
+                <div style="display: flex; justify-content: center; align-items: center; gap: 40px; margin-bottom: 30px;">
+                    <img src="pm_logo.png" alt="PMK" style="height: 90px; width: 300px;">
+                    <img src="do_logo.jpg" alt="DewertOkin" style="height: 90px; width: 260px;">
                 </div>
                 <form method="post">
                     <input type="hidden" name="action" value="new_request">
@@ -911,17 +848,12 @@ if ($stmt) {
 
         <?php
         $db_search_q = $search_term ? "WHERE megosztas_neve LIKE " . $pdo->quote('%' . $search_term . '%') : "";
-        $sql_db = "SELECT megosztas_id, megosztas_neve, terulet_id, felelos_id, masodlagos_felelos_id, 'PM' as rendszer FROM megosztasok $db_search_q
+        $sql_db = "SELECT megosztas_ID, megosztas_neve, terulet_ID, felelos_ID, masodlagos_felelos_ID, 'PM' as rendszer FROM Megosztasok $db_search_q
                            UNION ALL
-                           SELECT megosztas_id, megosztas_neve, terulet_id, felelos_id, masodlagos_felelos_id, 'DO' as rendszer FROM megosztasok_do $db_search_q
-                           ORDER BY rendszer, megosztas_id";
+                           SELECT megosztas_ID, megosztas_neve, terulet_ID, felelos_ID, masodlagos_felelos_ID, 'DO' as rendszer FROM Megosztasok_DO $db_search_q
+                           ORDER BY rendszer, megosztas_ID";
         $stmt_db = $pdo->query($sql_db);
         ?>
-
-        <?php if ($stmt_db === false): ?>
-        <?php $err = $pdo->errorInfo(); ?>
-            <div class="msg-box msg-error"><b>Adatbázis hiba (Mappák lekérése):</b> <?= htmlspecialchars($err[2] ?? 'Ismeretlen SQL hiba') ?></div>
-        <?php else: ?>
             <div class="card">
                 <h3>Adatbázis Lista</h3>
                 <div class="table-wrapper">
@@ -930,26 +862,26 @@ if ($stmt) {
                         <tbody>
                         <?php while ($row = $stmt_db->fetch(PDO::FETCH_ASSOC)):
                             $sys_key = $row['rendszer'];
-                            $terulet_nev = $row['terulet_id'];
+                            $terulet_nev = $row['terulet_ID'];
                             foreach ($all_areas[$sys_key] as $a) {
-                                if ($a['terulet_id'] == $row['terulet_id']) {
+                                if ($a['terulet_ID'] == $row['terulet_ID']) {
                                     $terulet_nev = $a['terulet_nev']; break;
                                 }
                             }
                             ?>
                             <tr>
                                 <td><span class="status-badge" style="background: <?= $row['rendszer'] == 'PM' ? '#003C71' : '#EF3340' ?>; color: white;"><?= $row['rendszer'] == 'PM' ? 'PMK' : $row['rendszer'] ?></span></td>
-                                <td><?= htmlspecialchars($row['megosztas_id']) ?></td>
+                                <td><?= htmlspecialchars($row['megosztas_ID']) ?></td>
                                 <td><b><?= htmlspecialchars($row['megosztas_neve']) ?></b></td>
                                 <td><small><?= htmlspecialchars($terulet_nev) ?></small></td>
                                 <form method="post">
                                     <input type="hidden" name="action" value="update_db_folder_owner">
-                                    <input type="hidden" name="f_id" value="<?= $row['megosztas_id'] ?>">
+                                    <input type="hidden" name="f_id" value="<?= $row['megosztas_ID'] ?>">
                                     <input type="hidden" name="f_sys" value="<?= $row['rendszer'] ?>">
                                     <td>
                                         <select name="new_owner" style="margin:0; height:auto; width:150px; font-size:0.85rem; padding:4px;">
                                             <?php foreach ($all_users[$sys_key] as $u): ?>
-                                                <option value="<?= $u['igenylo_id'] ?>" <?= $u['igenylo_id'] == $row['felelos_id'] ? 'selected' : '' ?>><?= htmlspecialchars($u['igenylo_nev']) ?></option>
+                                                <option value="<?= $u['igenylo_ID'] ?>" <?= $u['igenylo_ID'] == $row['felelos_ID'] ? 'selected' : '' ?>><?= htmlspecialchars($u['igenylo_nev']) ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </td>
@@ -957,7 +889,7 @@ if ($stmt) {
                                         <select name="new_sec" style="margin:0; height:auto; width:150px; font-size:0.85rem; padding:4px;">
                                             <option value="">-- Nincs --</option>
                                             <?php foreach ($all_users[$sys_key] as $u): ?>
-                                                <option value="<?= $u['igenylo_id'] ?>" <?= $u['igenylo_id'] == $row['masodlagos_felelos_id'] ? 'selected' : '' ?>><?= htmlspecialchars($u['igenylo_nev']) ?></option>
+                                                <option value="<?= $u['igenylo_ID'] ?>" <?= $u['igenylo_ID'] == $row['masodlagos_felelos_ID'] ? 'selected' : '' ?>><?= htmlspecialchars($u['igenylo_nev']) ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </td>
@@ -966,7 +898,7 @@ if ($stmt) {
                                 <td>
                                     <form method="post" onsubmit="return confirm('Biztosan törölni szeretnéd ezt a mappát? A művelet nem visszavonható!');" style="margin:0;">
                                         <input type="hidden" name="action" value="delete_db_folder">
-                                        <input type="hidden" name="del_id" value="<?= $row['megosztas_id'] ?>">
+                                        <input type="hidden" name="del_id" value="<?= $row['megosztas_ID'] ?>">
                                         <input type="hidden" name="del_sys" value="<?= $row['rendszer'] ?>">
                                         <button type="submit" class="btn btn-red" style="height:auto; padding:6px 10px; font-size:0.8rem;">🗑️ Törlés</button>
                                     </form>
@@ -977,13 +909,12 @@ if ($stmt) {
                     </table>
                 </div>
             </div>
-        <?php endif; ?>
             <script>
                 const dbAreas = <?= json_encode($all_areas) ?>; const dbUsers = <?= json_encode($all_users) ?>;
                 function updateDbLists() {
                     const sys = document.getElementById('dbSysSel').value, areaSel = document.getElementById('dbAreaSel');
                     areaSel.innerHTML = '<option value="">-- Válassz --</option>';
-                    if (sys && dbAreas[sys]) dbAreas[sys].forEach(a => areaSel.innerHTML += `<option value="${a.terulet_id}">${a.terulet_nev}</option>`);
+                    if (sys && dbAreas[sys]) dbAreas[sys].forEach(a => areaSel.innerHTML += `<option value="${a.terulet_ID}">${a.terulet_nev}</option>`);
                     updateDbOwners();
                 }
                 function updateDbOwners() {
@@ -991,13 +922,13 @@ if ($stmt) {
                     ownerSel.innerHTML = '<option value="">-- Válassz --</option>'; secOwnerSel.innerHTML = '<option value="">-- Opc. --</option>';
                     if (sys && dbUsers[sys]) {
                         let primaryUsers = []; let otherUsers = [];
-                        dbUsers[sys].forEach(u => { if (areaId && u.terulet_id == areaId) primaryUsers.push(u); else otherUsers.push(u); });
+                        dbUsers[sys].forEach(u => { if (areaId && u.terulet_ID == areaId) primaryUsers.push(u); else otherUsers.push(u); });
                         if (primaryUsers.length > 0) {
-                            let optGroup = '<optgroup label="Adott terület felhasználói">'; primaryUsers.forEach(u => optGroup += `<option value="${u.igenylo_id}">${u.igenylo_nev}</option>`); optGroup += '</optgroup>';
+                            let optGroup = '<optgroup label="Adott terület felhasználói">'; primaryUsers.forEach(u => optGroup += `<option value="${u.igenylo_ID}">${u.igenylo_nev}</option>`); optGroup += '</optgroup>';
                             ownerSel.innerHTML += optGroup; secOwnerSel.innerHTML += optGroup;
                         }
                         if (otherUsers.length > 0) {
-                            let optGroup = '<optgroup label="Többi felhasználó">'; otherUsers.forEach(u => optGroup += `<option value="${u.igenylo_id}">${u.igenylo_nev}</option>`); optGroup += '</optgroup>';
+                            let optGroup = '<optgroup label="Többi felhasználó">'; otherUsers.forEach(u => optGroup += `<option value="${u.igenylo_ID}">${u.igenylo_nev}</option>`); optGroup += '</optgroup>';
                             ownerSel.innerHTML += optGroup; secOwnerSel.innerHTML += optGroup;
                         }
                     }
@@ -1010,55 +941,36 @@ if ($stmt) {
         $review_sys = $_GET['sys'] ?? null;
 
         if ($review_folder_id && $review_sys):
-        $tbl_req = ($review_sys == 'DO') ? 'kerelem_do' : 'kerelem';
-        $tbl_user = ($review_sys == 'DO') ? 'igenylok_do' : 'igenylo';
-        $tbl_folder = ($review_sys == 'DO') ? 'megosztasok_do' : 'megosztasok';
+        $tbl_req = ($review_sys == 'DO') ? 'Kerelem_DO' : 'Kerelem';
+        $tbl_user = ($review_sys == 'DO') ? 'Igenylok_DO' : 'igenylo';
+        $tbl_folder = ($review_sys == 'DO') ? 'Megosztasok_DO' : 'Megosztasok';
 
-        $stmt = $pdo->prepare("SELECT megosztas_neve FROM $tbl_folder WHERE megosztas_id = ?");
-        if ($stmt) {
-            $stmt->execute([$review_folder_id]);
-            $f_name = $stmt->fetchColumn();
-        } else {
-            $f_name = 'Ismeretlen mappa';
-        }
+        $stmt = $pdo->prepare("SELECT megosztas_neve FROM $tbl_folder WHERE megosztas_ID = ?");
+        $stmt->execute([$review_folder_id]);
+        $f_name = $stmt->fetchColumn();
 
-        $stmt = $pdo->prepare("
-                        SELECT k.kerelem_id, k.igenylo_id, k.kerelem_datum, k.hozzaferes_tipusa, i.igenylo_nev, i.igenylo_email 
-                        FROM $tbl_req k 
-                        JOIN $tbl_user i ON k.igenylo_id = i.igenylo_id 
-                        WHERE k.megosztas_id = ? AND k.status = 'accepted'
-                        ORDER BY i.igenylo_nev ASC
-                    ");
-
-        if ($stmt) {
-            $stmt->execute([$review_folder_id]);
-            $active_users = $stmt->fetchAll();
-        } else {
-            $err = $pdo->errorInfo();
-            echo "<div class='msg-box msg-error'><b>SQL Hiba:</b> " . htmlspecialchars($err[2] ?? 'Ismeretlen hiba') . "</div>";
-            $active_users = [];
-        }
+        $stmt = $pdo->prepare("SELECT k.kerelem_ID, k.igenylo_ID, k.kerelem_datum, k.hozzaferes_tipusa, i.igenylo_nev, i.igenylo_email FROM $tbl_req k JOIN $tbl_user i ON k.igenylo_ID = i.igenylo_ID WHERE k.megosztas_ID = ? AND k.status = 'accepted' ORDER BY i.igenylo_nev ASC");
+        $stmt->execute([$review_folder_id]);
+        $active_users = $stmt->fetchAll();
         ?>
             <div class="card">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
                     <h3>Ellenőrzés: <span style="color:var(--primary);"><?= htmlspecialchars($f_name) ?></span> (<?= $review_sys ?>)</h3>
                     <a href="?page=felulvizsgalat" class="btn btn-blue" style="text-decoration:none;">&larr; Vissza a listához</a>
                 </div>
-
                 <div class="msg-box msg-warning">ℹ️ Kérlek, pipáld be azokat a felhasználókat, akiktől <b style="color:#d32f2f; font-weight:bold;">MEG SZERETNÉD VONNI</b> a jogosultságot!</div>
-
                 <form method="post">
                     <input type="hidden" name="action" value="submit_review">
                     <input type="hidden" name="rev_sys" value="<?= $review_sys ?>">
                     <input type="hidden" name="rev_folder_id" value="<?= $review_folder_id ?>">
                     <div class="table-wrapper">
                         <table>
-                            <thead><tr><th style="width: 50px; text-align: center; color: #d32f2f;">Megvonnád?</th><th>Felhasználó</th><th>Email</th><th>Jog típusa</th><th>Mióta van joga?</th></tr></thead>
+                            <thead><tr><th style="width:50px; text-align:center; color:#d32f2f;">Megvonnád?</th><th>Felhasználó</th><th>Email</th><th>Jog típusa</th><th>Mióta van joga?</th></tr></thead>
                             <tbody>
                             <?php if (count($active_users) > 0): ?>
                                 <?php foreach ($active_users as $au): ?>
                                     <tr>
-                                        <td style="text-align:center;"><input type="checkbox" name="revoke_users[]" value="<?= $au['kerelem_id'] ?>" style="width:20px; height:20px; cursor:pointer;"></td>
+                                        <td style="text-align:center;"><input type="checkbox" name="revoke_users[]" value="<?= $au['kerelem_ID'] ?>" style="width:20px; height:20px; cursor:pointer;"></td>
                                         <td><b><?= htmlspecialchars($au['igenylo_nev']) ?></b></td>
                                         <td><?= htmlspecialchars($au['igenylo_email'] ?? '-') ?></td>
                                         <td><?= $au['hozzaferes_tipusa'] ?></td>
@@ -1076,7 +988,6 @@ if ($stmt) {
                     </div>
                 </form>
             </div>
-
         <?php else:
             $six_months_ago = date('Y-m-d H:i:s', strtotime('-6 months'));
             $is_it_admin = ($role === 'it_admin') ? 1 : 0;
@@ -1086,28 +997,18 @@ if ($stmt) {
                 $search_condition = " AND (m.megosztas_neve LIKE $quoted_search OR i.igenylo_nev LIKE $quoted_search) ";
             }
 
-            $sql_list = "
-                        SELECT m.megosztas_id, m.megosztas_neve, m.felelos_id, m.utolso_ellenorzes_datum, 'PM' as rendszer, i.igenylo_nev
-                        FROM megosztasok m LEFT JOIN igenylo i ON m.felelos_id = i.igenylo_id
+            $sql_list = "SELECT m.megosztas_ID, m.megosztas_neve, m.felelos_ID, m.utolso_ellenorzes_datum, 'PM' as rendszer, i.igenylo_nev
+                        FROM Megosztasok m LEFT JOIN igenylo i ON m.felelos_ID = i.igenylo_ID
                         WHERE (m.utolso_ellenorzes_datum IS NULL OR m.utolso_ellenorzes_datum < '$six_months_ago')
-                        AND ( $is_it_admin = 1 OR m.felelos_id = $my_user_id OR m.masodlagos_felelos_id = $my_user_id ) $search_condition
+                        AND ( $is_it_admin = 1 OR m.felelos_ID = $my_user_id OR m.masodlagos_felelos_ID = $my_user_id ) $search_condition
                         UNION ALL
-                        SELECT m.megosztas_id, m.megosztas_neve, m.felelos_id, m.utolso_ellenorzes_datum, 'DO' as rendszer, i.igenylo_nev
-                        FROM megosztasok_do m LEFT JOIN igenylok_do i ON m.felelos_id = i.igenylo_id
+                        SELECT m.megosztas_ID, m.megosztas_neve, m.felelos_ID, m.utolso_ellenorzes_datum, 'DO' as rendszer, i.igenylo_nev
+                        FROM Megosztasok_DO m LEFT JOIN Igenylok_DO i ON m.felelos_ID = i.igenylo_ID
                         WHERE (m.utolso_ellenorzes_datum IS NULL OR m.utolso_ellenorzes_datum < '$six_months_ago')
-                        AND ( $is_it_admin = 1 OR m.felelos_id = $my_user_id OR m.masodlagos_felelos_id = $my_user_id ) $search_condition
-                    ";
+                        AND ( $is_it_admin = 1 OR m.felelos_ID = $my_user_id OR m.masodlagos_felelos_ID = $my_user_id ) $search_condition";
 
-            $stmt = $pdo->query($sql_list);
-            if ($stmt === false) {
-                $err = $pdo->errorInfo();
-                echo "<div class='msg-box msg-error'><b>Adatbázis hiba a listázásnál:</b><br>" . htmlspecialchars($err[2] ?? 'Ismeretlen hiba') . "</div>";
-                $tasks = [];
-            } else {
-                $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            }
+            $tasks = $pdo->query($sql_list)->fetchAll();
             ?>
-
             <div class="card">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <h3>⚠️ Felülvizsgálatra váró mappák</h3>
@@ -1125,10 +1026,9 @@ if ($stmt) {
                         <button type="submit" class="search-btn">Keresés</button>
                     </form>
                 </div>
-
-                <?php if (count($tasks) == 0 && $stmt !== false): ?>
+                <?php if (count($tasks) == 0): ?>
                     <div class="msg-box msg-success">🎉 Nincs elmaradás! Minden mappa ellenőrizve van.</div>
-                <?php elseif (count($tasks) > 0): ?>
+                <?php else: ?>
                     <div class="table-wrapper">
                         <table>
                             <thead><tr><th>Rendszer</th><th>Mappa neve</th><th>Felelős</th><th>Utolsó ellenőrzés</th><th>Művelet</th></tr></thead>
@@ -1137,11 +1037,11 @@ if ($stmt) {
                                 <tr>
                                     <td><span class="status-badge" style="background: <?= $t['rendszer'] == 'PM' ? '#003C71' : '#EF3340' ?>; color: white;"><?= $t['rendszer'] ?></span></td>
                                     <td><b><?= htmlspecialchars($t['megosztas_neve']) ?></b></td>
-                                    <td><?= htmlspecialchars($t['igenylo_nev'] ?? 'Ismeretlen ID: ' . $t['felelos_id']) ?><?php if ($t['felelos_id'] == $my_user_id) echo ' <small>(Te - Fő)</small>'; ?></td>
+                                    <td><?= htmlspecialchars($t['igenylo_nev'] ?? 'Ismeretlen ID: ' . $t['felelos_ID']) ?><?php if ($t['felelos_ID'] == $my_user_id) echo ' <small>(Te - Fő)</small>'; ?></td>
                                     <td><?= $t['utolso_ellenorzes_datum'] ? date('Y.m.d', strtotime($t['utolso_ellenorzes_datum'])) : '<span style="color:red; font-weight:bold;">Sosem volt</span>' ?></td>
                                     <td>
-                                        <?php if ($role === 'it_admin' || $t['felelos_id'] == $my_user_id): ?>
-                                            <a href="?page=felulvizsgalat&sys=<?= $t['rendszer'] ?>&folder_id=<?= $t['megosztas_id'] ?>" class="btn btn-blue" style="text-decoration:none; height:auto; padding: 6px 12px; font-size: 0.9rem;">Ellenőrzés indítása &rarr;</a>
+                                        <?php if ($role === 'it_admin' || $t['felelos_ID'] == $my_user_id): ?>
+                                            <a href="?page=felulvizsgalat&sys=<?= $t['rendszer'] ?>&folder_id=<?= $t['megosztas_ID'] ?>" class="btn btn-blue" style="text-decoration:none; height:auto; padding: 6px 12px; font-size: 0.9rem;">Ellenőrzés indítása &rarr;</a>
                                         <?php else: ?>
                                             <span class="status-badge" style="background:#E5E7EB; color:#6B7280;">Másodlagos (nincs jog)</span>
                                         <?php endif; ?>
@@ -1161,32 +1061,20 @@ if ($stmt) {
         $f_owner = trim($_GET['f_owner'] ?? '');
         $where_clauses = ["m.utolso_ellenorzes_datum IS NOT NULL"];
         $params = [];
-
         if ($f_mappa) { $where_clauses[] = "m.megosztas_neve LIKE ?"; $params[] = "%$f_mappa%"; }
         if ($f_owner) { $where_clauses[] = "i.igenylo_nev LIKE ?"; $params[] = "%$f_owner%"; }
         $where_sql = implode(" AND ", $where_clauses);
 
-        $sql_log = "
-                    SELECT m.megosztas_id, m.megosztas_neve, m.utolso_ellenorzes_datum, 'PM' as rendszer, i.igenylo_nev as felelos_nev
-                    FROM megosztasok m JOIN igenylo i ON m.felelos_id = i.igenylo_id WHERE $where_sql
+        $sql_log = "SELECT m.megosztas_ID, m.megosztas_neve, m.utolso_ellenorzes_datum, 'PM' as rendszer, i.igenylo_nev as felelos_nev
+                    FROM Megosztasok m JOIN igenylo i ON m.felelos_ID = i.igenylo_ID WHERE $where_sql
                     UNION ALL
-                    SELECT m.megosztas_id, m.megosztas_neve, m.utolso_ellenorzes_datum, 'DO' as rendszer, i.igenylo_nev as felelos_nev
-                    FROM megosztasok_do m JOIN igenylok_do i ON m.felelos_id = i.igenylo_id WHERE $where_sql
-                    ORDER BY utolso_ellenorzes_datum DESC
-                ";
-
+                    SELECT m.megosztas_ID, m.megosztas_neve, m.utolso_ellenorzes_datum, 'DO' as rendszer, i.igenylo_nev as felelos_nev
+                    FROM Megosztasok_DO m JOIN Igenylok_DO i ON m.felelos_ID = i.igenylo_ID WHERE $where_sql
+                    ORDER BY utolso_ellenorzes_datum DESC";
         $stmt_log = $pdo->prepare($sql_log);
-
-        if ($stmt_log === false) {
-            $err = $pdo->errorInfo();
-            echo "<div class='msg-box msg-error'><b>SQL Hiba a Naplóban:</b> " . htmlspecialchars($err[2] ?? 'Ismeretlen hiba') . "</div>";
-            $logs = [];
-        } else {
-            $stmt_log->execute(array_merge($params, $params));
-            $logs = $stmt_log->fetchAll(PDO::FETCH_ASSOC);
-        }
+        $stmt_log->execute(array_merge($params, $params));
+        $logs = $stmt_log->fetchAll();
         ?>
-
             <div class="card">
                 <h3>📜 Felülvizsgálati Napló (Lezárt ellenőrzések)</h3>
                 <form method="get" class="search-container" style="background: #f9fafb; padding: 20px; border-radius: 8px; border: 1px solid #e5e7eb; display:flex; flex-wrap:wrap; gap:15px; align-items:flex-end;">
@@ -1195,7 +1083,6 @@ if ($stmt) {
                     <div style="flex: 1; min-width: 200px;"><label>Felelős neve:</label><input type="text" name="f_owner" class="search-input" value="<?= htmlspecialchars($f_owner) ?>"></div>
                     <div style="display: flex; gap: 10px;"><button type="submit" class="btn btn-blue" style="margin: 0;">Szűrés</button><a href="?page=felulvizsgalat_log" class="btn" style="background:#6B7280; color:white; text-decoration:none;">Alaphelyzet</a></div>
                 </form>
-
                 <div class="table-wrapper" style="margin-top: 20px;">
                     <table>
                         <thead><tr><th>Rendszer</th><th>Mappa neve</th><th>Felelős (Tulajdonos)</th><th>Utolsó sikeres felülvizsgálat</th><th>Státusz</th></tr></thead>
@@ -1210,7 +1097,7 @@ if ($stmt) {
                                     <?php if (strtotime($l['utolso_ellenorzes_datum']) < strtotime('-1 year')) echo '<td><span class="status-badge st-rejected">Elmaradott</span></td>'; else echo '<td><span class="status-badge st-accepted">Rendben</span></td>'; ?>
                                 </tr>
                             <?php endforeach; ?>
-                        <?php elseif ($stmt_log !== false): ?>
+                        <?php else: ?>
                             <tr><td colspan="5" style="text-align:center; padding: 30px;">Nincs a szűrésnek megfelelő lezárt felülvizsgálat.</td></tr>
                         <?php endif; ?>
                         </tbody>
@@ -1256,15 +1143,15 @@ if ($stmt) {
                             $st_filter = ($page == 'fuggo') ? "status='pending'" : "status IN ('accepted','rejected','revoke')";
 
                             $q = "SELECT * FROM ( 
-                                        (SELECT k.kerelem_id, k.status, k.indoklas, k.kerelem_datum, i.igenylo_nev, m.megosztas_neve, k.hozzaferes_tipusa, 'PM' as src, m.felelos_id as f1, m.masodlagos_felelos_id as f2,
-                                            (SELECT COALESCE(u1.igenylo_nev, u2.igenylo_nev) FROM Biralat b LEFT JOIN igenylo u1 ON b.admin_id = u1.igenylo_id LEFT JOIN igenylok_do u2 ON b.admin_id = u2.igenylo_id WHERE b.kerelem_id = k.kerelem_id AND b.rendszer = 'PM' ORDER BY b.datum DESC LIMIT 1) as jovahagyo_nev,
-                                            (SELECT admin_comment FROM Biralat b WHERE b.kerelem_id = k.kerelem_id AND b.rendszer = 'PM' ORDER BY b.datum DESC LIMIT 1) as admin_megjegyzes
-                                        FROM kerelem k JOIN igenylo i ON k.igenylo_id=i.igenylo_id JOIN megosztasok m ON k.megosztas_id=m.megosztas_id) 
+                                        (SELECT k.kerelem_ID, k.status, k.indoklas, k.kerelem_datum, i.igenylo_nev, m.megosztas_neve, k.hozzaferes_tipusa, 'PM' as src, m.felelos_ID as f1, m.masodlagos_felelos_ID as f2,
+                                            (SELECT COALESCE(u1.igenylo_nev, u2.igenylo_nev) FROM Biralat b LEFT JOIN igenylo u1 ON b.admin_ID = u1.igenylo_ID LEFT JOIN Igenylok_DO u2 ON b.admin_ID = u2.igenylo_ID WHERE b.kerelem_ID = k.kerelem_ID AND b.rendszer = 'PM' ORDER BY b.datum DESC LIMIT 1) as jovahagyo_nev,
+                                            (SELECT admin_comment FROM Biralat b WHERE b.kerelem_ID = k.kerelem_ID AND b.rendszer = 'PM' ORDER BY b.datum DESC LIMIT 1) as admin_megjegyzes
+                                        FROM Kerelem k JOIN igenylo i ON k.igenylo_ID=i.igenylo_ID JOIN Megosztasok m ON k.megosztas_ID=m.megosztas_ID) 
                                         UNION ALL 
-                                        (SELECT k.kerelem_id, k.status, k.indoklas, k.kerelem_datum, i.igenylo_nev, m.megosztas_neve, k.hozzaferes_tipusa, 'DO' as src, m.felelos_id as f1, m.masodlagos_felelos_id as f2,
-                                            (SELECT COALESCE(u1.igenylo_nev, u2.igenylo_nev) FROM Biralat b LEFT JOIN igenylo u1 ON b.admin_id = u1.igenylo_id LEFT JOIN igenylok_do u2 ON b.admin_id = u2.igenylo_id WHERE b.kerelem_id = k.kerelem_id AND b.rendszer = 'DO' ORDER BY b.datum DESC LIMIT 1) as jovahagyo_nev,
-                                            (SELECT admin_comment FROM Biralat b WHERE b.kerelem_id = k.kerelem_id AND b.rendszer = 'DO' ORDER BY b.datum DESC LIMIT 1) as admin_megjegyzes
-                                        FROM kerelem_do k JOIN igenylok_do i ON k.igenylo_id=i.igenylo_id JOIN megosztasok_do m ON k.megosztas_id=m.megosztas_id) 
+                                        (SELECT k.kerelem_ID, k.status, k.indoklas, k.kerelem_datum, i.igenylo_nev, m.megosztas_neve, k.hozzaferes_tipusa, 'DO' as src, m.felelos_ID as f1, m.masodlagos_felelos_ID as f2,
+                                            (SELECT COALESCE(u1.igenylo_nev, u2.igenylo_nev) FROM Biralat b LEFT JOIN igenylo u1 ON b.admin_ID = u1.igenylo_ID LEFT JOIN Igenylok_DO u2 ON b.admin_ID = u2.igenylo_ID WHERE b.kerelem_ID = k.kerelem_ID AND b.rendszer = 'DO' ORDER BY b.datum DESC LIMIT 1) as jovahagyo_nev,
+                                            (SELECT admin_comment FROM Biralat b WHERE b.kerelem_ID = k.kerelem_ID AND b.rendszer = 'DO' ORDER BY b.datum DESC LIMIT 1) as admin_megjegyzes
+                                        FROM Kerelem_DO k JOIN Igenylok_DO i ON k.igenylo_ID=i.igenylo_ID JOIN Megosztasok_DO m ON k.megosztas_ID=m.megosztas_ID) 
                                     ) as t WHERE $st_filter";
 
                             if ($search_term) $q .= " AND (igenylo_nev LIKE " . $pdo->quote('%' . $search_term . '%') . " OR megosztas_neve LIKE " . $pdo->quote('%' . $search_term . '%') . ")";
@@ -1272,61 +1159,48 @@ if ($stmt) {
                             if (strtolower($role) == 'user') $q .= " AND igenylo_nev=" . $pdo->quote($my_full_name);
                             elseif (in_array(strtolower($role), ['mappa_felelos', 'masodlagos_felelos'])) $q .= " AND (f1=$my_user_id OR f2=$my_user_id OR igenylo_nev=" . $pdo->quote($my_full_name) . ")";
 
-                            $q .= " ORDER BY kerelem_id DESC";
+                            $q .= " ORDER BY kerelem_ID DESC";
 
                             $res = $pdo->query($q);
-
-                            if ($res === false) {
-                                $err = $pdo->errorInfo();
-                                echo "<tr><td colspan='10'><div class='msg-box msg-error'><b>Adatbázis hiba:</b> " . htmlspecialchars($err[2] ?? 'Ismeretlen hiba') . "</div></td></tr>";
-                            } else {
-                                while ($r = $res->fetch()):
-                                    $display_date = date('Y.m.d H:i', strtotime($r['kerelem_datum']));
-                                    $can_approve = false;
-                                    if (in_array(strtolower($role), ['it_admin'])) {
-                                        $can_approve = true;
-                                    } elseif (strtolower($role) == 'mappa_felelos' && $r['f1'] == $my_user_id) {
-                                        $can_approve = true;
-                                    }
-                                    ?>
-                                    <tr>
-                                        <?php if (strtolower($role) !== 'user'): ?>
-                                            <td><?php if ($can_approve && in_array($r['status'], ['pending', 'accepted'])): ?><input type="checkbox" id="chk_<?= $r['kerelem_id'] ?>" name="req_data[]" value="<?= $r['kerelem_id'] ?>|<?= $r['src'] ?>"><?php endif; ?></td>
-                                        <?php endif; ?>
-                                        <td><?= getStatusBadge($r['status']) ?></td>
-                                        <td class="col-nowrap"><?= $display_date ?></td>
-                                        <td><b><?= htmlspecialchars($r['igenylo_nev']) ?></b></td>
-                                        <td class="col-reason"><?= htmlspecialchars($r['indoklas']) ?></td>
-                                        <td class="col-nowrap"><?= str_replace(['_RO', '_RW'], '', $r['megosztas_neve']) ?></td>
-                                        <td><?= $r['hozzaferes_tipusa'] ?></td>
-                                        <td><?= $r['jovahagyo_nev'] ? htmlspecialchars($r['jovahagyo_nev']) : '-' ?></td>
-
-                                        <?php if (strtolower($role) !== 'user'): ?>
-                                            <td>
-                                                <?php if (in_array($r['status'], ['pending', 'accepted']) && $can_approve): ?>
-                                                    <?php if ($r['status'] == 'accepted' && !empty($r['admin_megjegyzes'])): ?><div style="font-size:0.75rem; color:#6B7280; margin-bottom:4px; line-height:1.2;"><i>Elfogadva: <?= htmlspecialchars($r['admin_megjegyzes']) ?></i></div><?php endif; ?>
-                                                    <input type="text" name="admin_comment[<?= $r['kerelem_id'] ?>]" placeholder="<?= $r['status'] == 'accepted' ? 'Visszavonás oka...' : 'Megjegyzés...' ?>" style="margin:0; width:100%; min-width:150px; padding:6px; height:auto; border:1px solid #D1D5DB; border-radius:6px;">
-                                                <?php else: ?>
-                                                    <span style="color:#6B7280; font-style:italic; font-size:0.85rem;"><?= htmlspecialchars($r['admin_megjegyzes'] ?? '-') ?></span>
-                                                <?php endif; ?>
-                                            </td>
-                                        <?php endif; ?>
-
-                                        <td style="text-align:right; white-space:nowrap;">
-                                            <?php if ($can_approve): ?>
-                                                <?php if ($r['status'] == 'pending'): ?>
-                                                    <button type="submit" name="action" value="approve" class="btn btn-green" style="height:32px; padding:0 10px;" onclick="document.getElementById('chk_<?= $r['kerelem_id'] ?>').checked = true;">✓</button>
-                                                    <button type="submit" name="action" value="reject" class="btn btn-red" style="height:32px; padding:0 10px;" onclick="document.getElementById('chk_<?= $r['kerelem_id'] ?>').checked = true;">✕</button>
-                                                <?php elseif ($r['status'] == 'accepted'): ?>
-                                                    <button type="submit" name="action" value="revoke" class="btn btn-red" style="font-size:0.8rem; height:32px; padding:0 10px;" onclick="document.getElementById('chk_<?= $r['kerelem_id'] ?>').checked = true;">Visszavonás</button>
-                                                <?php endif; ?>
+                            while ($r = $res->fetch()):
+                                $display_date = date('Y.m.d H:i', strtotime($r['kerelem_datum']));
+                                $can_approve = (in_array(strtolower($role), ['it_admin']) || (strtolower($role) == 'mappa_felelos' && $r['f1'] == $my_user_id));
+                                ?>
+                                <tr>
+                                    <?php if (strtolower($role) !== 'user'): ?>
+                                        <td><?php if ($can_approve && in_array($r['status'], ['pending', 'accepted'])): ?><input type="checkbox" id="chk_<?= $r['kerelem_ID'] ?>" name="req_data[]" value="<?= $r['kerelem_ID'] ?>|<?= $r['src'] ?>"><?php endif; ?></td>
+                                    <?php endif; ?>
+                                    <td><?= getStatusBadge($r['status']) ?></td>
+                                    <td class="col-nowrap"><?= $display_date ?></td>
+                                    <td><b><?= htmlspecialchars($r['igenylo_nev']) ?></b></td>
+                                    <td class="col-reason"><?= htmlspecialchars($r['indoklas']) ?></td>
+                                    <td class="col-nowrap"><?= str_replace(['_RO', '_RW'], '', $r['megosztas_neve']) ?></td>
+                                    <td><?= $r['hozzaferes_tipusa'] ?></td>
+                                    <td><?= $r['jovahagyo_nev'] ? htmlspecialchars($r['jovahagyo_nev']) : '-' ?></td>
+                                    <?php if (strtolower($role) !== 'user'): ?>
+                                        <td>
+                                            <?php if (in_array($r['status'], ['pending', 'accepted']) && $can_approve): ?>
+                                                <?php if ($r['status'] == 'accepted' && !empty($r['admin_megjegyzes'])): ?><div style="font-size:0.75rem; color:#6B7280; margin-bottom:4px;"><i>Elfogadva: <?= htmlspecialchars($r['admin_megjegyzes']) ?></i></div><?php endif; ?>
+                                                <input type="text" name="admin_comment[<?= $r['kerelem_ID'] ?>]" placeholder="<?= $r['status'] == 'accepted' ? 'Visszavonás oka...' : 'Megjegyzés...' ?>" style="margin:0; width:100%; padding:6px; height:auto; border-radius:6px;">
                                             <?php else: ?>
-                                                <span style="font-size:0.8rem; color:#888;">Másodlagos</span>
+                                                <span style="color:#6B7280; font-style:italic; font-size:0.85rem;"><?= htmlspecialchars($r['admin_megjegyzes'] ?? '-') ?></span>
                                             <?php endif; ?>
                                         </td>
-                                    </tr>
-                                <?php endwhile;
-                            } ?>
+                                    <?php endif; ?>
+                                    <td style="text-align:right; white-space:nowrap;">
+                                        <?php if ($can_approve): ?>
+                                            <?php if ($r['status'] == 'pending'): ?>
+                                                <button type="submit" name="action" value="approve" class="btn btn-green" style="height:32px; padding:0 10px;" onclick="document.getElementById('chk_<?= $r['kerelem_ID'] ?>').checked = true;">✓</button>
+                                                <button type="submit" name="action" value="reject" class="btn btn-red" style="height:32px; padding:0 10px;" onclick="document.getElementById('chk_<?= $r['kerelem_ID'] ?>').checked = true;">✕</button>
+                                            <?php elseif ($r['status'] == 'accepted'): ?>
+                                                <button type="submit" name="action" value="revoke" class="btn btn-red" style="font-size:0.8rem; height:32px; padding:0 10px;" onclick="document.getElementById('chk_<?= $r['kerelem_ID'] ?>').checked = true;">Visszavonás</button>
+                                            <?php endif; ?>
+                                        <?php else: ?>
+                                            <span style="font-size:0.8rem; color:#888;">Másodlagos</span>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
                             </tbody>
                         </table>
                     </div>

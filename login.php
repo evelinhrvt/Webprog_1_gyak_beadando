@@ -35,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($user && password_verify($password, $user['igenylo_password'])) {
                 $_SESSION['user_id'] = $user['igenylo_ID'];
                 $_SESSION['username'] = $user['igenylo_nev'];
+                $_SESSION['full_name'] = $user['igenylo_nev'];
                 $_SESSION['logged_in'] = true;
 
                 header("Location: index.php");
@@ -99,5 +100,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </div>
 </body>
-</html>
 </html>

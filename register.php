@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $hashedPass = password_hash($password, PASSWORD_DEFAULT);
 
                     // JAVÍTÁS: Itt adjuk meg, hogy az 'igenylo_jog' alapból 'user' legyen
-                    $insert = $pdo->prepare("INSERT INTO igenylo (igenylo_nev, igenylo_email, igenylo_password, igenylo_jog) VALUES (:nev, :email, :pass, 'user')");
+                    $insert = $pdo->prepare("INSERT INTO igenylo (igenylo_nev, terulet_ID, igenylo_email, igenylo_password, igenylo_jog) VALUES (:nev, '', :email, :pass, 'user')");
 
                     if ($insert->execute([
                             'nev'   => $username,

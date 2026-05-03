@@ -1,0 +1,1038 @@
+[05-Feb-2026 10:20:09 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'teljes_nev' in 'field list' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php:12
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(12): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php on line 12
+[05-Feb-2026 10:23:37 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[21000]: Cardinality violation: 1222 The used SELECT statements have a different number of columns in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php:12
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(12): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php on line 12
+[05-Feb-2026 10:24:18 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:244
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(244): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 244
+[05-Feb-2026 10:24:37 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:244
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(244): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 244
+[05-Feb-2026 10:24:38 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:244
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(244): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 244
+[05-Feb-2026 10:24:39 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:244
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(244): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 244
+[05-Feb-2026 10:26:32 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:244
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(244): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 244
+[05-Feb-2026 10:26:33 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:244
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(244): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 244
+[05-Feb-2026 10:26:33 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:244
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(244): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 244
+[05-Feb-2026 10:26:34 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:244
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(244): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 244
+[05-Feb-2026 10:26:35 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:244
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(244): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 244
+[05-Feb-2026 10:27:02 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:244
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(244): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 244
+[05-Feb-2026 10:27:03 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:244
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(244): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 244
+[05-Feb-2026 10:27:04 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:244
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(244): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 244
+[05-Feb-2026 10:27:15 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:244
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(244): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 244
+[05-Feb-2026 10:27:16 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:244
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(244): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 244
+[05-Feb-2026 10:27:17 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:244
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(244): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 244
+[05-Feb-2026 10:27:31 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:244
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(244): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 244
+[05-Feb-2026 10:27:32 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:244
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(244): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 244
+[05-Feb-2026 10:27:51 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:244
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(244): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 244
+[05-Feb-2026 10:27:52 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:244
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(244): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 244
+[05-Feb-2026 10:27:55 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:244
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(244): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 244
+[05-Feb-2026 10:30:24 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:285
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(285): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 285
+[05-Feb-2026 10:30:25 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:285
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(285): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 285
+[05-Feb-2026 10:30:26 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:285
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(285): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 285
+[05-Feb-2026 10:30:33 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:285
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(285): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 285
+[05-Feb-2026 10:30:34 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:285
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(285): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 285
+[05-Feb-2026 10:30:41 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:285
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(285): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 285
+[05-Feb-2026 10:30:42 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:285
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(285): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 285
+[05-Feb-2026 10:30:57 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:285
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(285): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 285
+[05-Feb-2026 10:30:58 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:285
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(285): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 285
+[05-Feb-2026 10:30:59 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:285
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(285): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 285
+[05-Feb-2026 10:32:17 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:285
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(285): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 285
+[05-Feb-2026 10:32:18 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.felelos_ID' in 'where clause' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:285
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(285): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 285
+[06-Feb-2026 09:09:26 Europe/Belgrade] PHP Warning:  require(vendor/autoload.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\ticket.php on line 11
+[06-Feb-2026 09:09:26 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Failed opening required 'vendor/autoload.php' (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\ticket.php:11
+Stack trace:
+#0 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\ticket.php on line 11
+[06-Feb-2026 09:09:33 Europe/Belgrade] PHP Warning:  require(vendor/autoload.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\ticket.php on line 11
+[06-Feb-2026 09:09:33 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Failed opening required 'vendor/autoload.php' (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\ticket.php:11
+Stack trace:
+#0 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\ticket.php on line 11
+[06-Feb-2026 09:43:09 Europe/Belgrade] PHP Fatal error:  Cannot use PHPMailer\PHPMailer\PHPMailer as PHPMailer because the name is already in use in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\ticket.php on line 71
+[06-Feb-2026 11:15:32 Europe/Belgrade] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'email_sent' in 'field list' in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:57
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(57): PDO->prepare()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 57
+[06-Feb-2026 11:18:40 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Class "PHPMailer\PHPMailer\PHPMailer" not found in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\ticket.php:54
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(64): include()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\ticket.php on line 54
+[06-Feb-2026 11:18:58 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Class "PHPMailer\PHPMailer\PHPMailer" not found in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\ticket.php:54
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php(64): include()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\ticket.php on line 54
+[06-Feb-2026 11:23:13 Europe/Belgrade] HIBA: A vendor/autoload.php nem tal�lhat�! Telep�tsd a PHPMailer-t composer-rel.
+[06-Feb-2026 11:29:38 Europe/Belgrade] HIBA: A vendor/autoload.php nem tal�lhat�! Telep�tsd a PHPMailer-t composer-rel.
+[06-Feb-2026 11:41:38 Europe/Belgrade] HIBA: A vendor/autoload.php nem tal�lhat�! Telep�tsd a PHPMailer-t composer-rel.
+[06-Feb-2026 12:44:24 Europe/Belgrade] HIBA: A vendor/autoload.php nem tal�lhat�! Telep�tsd a PHPMailer-t composer-rel.
+[09-Feb-2026 11:15:49 Europe/Belgrade] HIBA: A vendor/autoload.php nem tal�lhat�! Telep�tsd a PHPMailer-t composer-rel.
+[09-Feb-2026 11:23:31 Europe/Belgrade] HIBA: A vendor/autoload.php nem tal�lhat�! Telep�tsd a PHPMailer-t composer-rel.
+[09-Feb-2026 11:26:21 Europe/Belgrade] HIBA: A vendor/autoload.php nem tal�lhat�! Telep�tsd a PHPMailer-t composer-rel.
+[11-Feb-2026 09:19:58 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 09:19:58 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 09:20:08 Europe/Belgrade] HIBA: A vendor/autoload.php nem tal�lhat�!
+[11-Feb-2026 09:20:09 Europe/Belgrade] HIBA: A vendor/autoload.php nem tal�lhat�!
+[11-Feb-2026 09:26:53 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 09:26:53 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 09:27:03 Europe/Belgrade] HIBA: A vendor/autoload.php nem tal�lhat�!
+[11-Feb-2026 09:28:46 Europe/Belgrade] HIBA: A vendor/autoload.php nem tal�lhat�!
+[11-Feb-2026 09:29:01 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 09:29:01 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 09:29:12 Europe/Belgrade] HIBA: A vendor/autoload.php nem tal�lhat�!
+[11-Feb-2026 09:29:28 Europe/Belgrade] HIBA: A vendor/autoload.php nem tal�lhat�!
+[11-Feb-2026 09:30:38 Europe/Belgrade] HIBA: A vendor/autoload.php nem tal�lhat�!
+[11-Feb-2026 09:30:42 Europe/Belgrade] HIBA: A vendor/autoload.php nem tal�lhat�!
+[11-Feb-2026 09:30:45 Europe/Belgrade] HIBA: A vendor/autoload.php nem tal�lhat�!
+[11-Feb-2026 09:30:48 Europe/Belgrade] HIBA: A vendor/autoload.php nem tal�lhat�!
+[11-Feb-2026 09:30:51 Europe/Belgrade] HIBA: A vendor/autoload.php nem tal�lhat�!
+[11-Feb-2026 09:31:52 Europe/Belgrade] HIBA: A vendor/autoload.php nem tal�lhat�!
+[11-Feb-2026 09:32:15 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 09:32:15 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 09:32:20 Europe/Belgrade] HIBA: A vendor/autoload.php nem tal�lhat�!
+[11-Feb-2026 09:40:41 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 09:40:41 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 09:45:32 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 09:45:32 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 09:48:44 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 09:48:44 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 09:56:14 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 09:56:14 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 09:58:54 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 09:58:54 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:00:39 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:00:39 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:01:14 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:01:14 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:04:19 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:04:19 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:13:37 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:13:37 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:13:43 Europe/Belgrade] PHP Warning:  Undefined array key "ticket_ID" in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\ticket.php on line 81
+[11-Feb-2026 10:15:50 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:15:50 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:15:56 Europe/Belgrade] PHP Warning:  Undefined array key "ticket_ID" in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\ticket.php on line 90
+[11-Feb-2026 10:22:45 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:22:45 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:31:00 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:31:00 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:34:20 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:34:20 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:37:08 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:37:08 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:38:23 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:38:23 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:44:15 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:44:15 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:48:45 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:48:45 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:51:55 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:51:55 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:53:20 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:53:20 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:56:10 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:56:10 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:56:17 Europe/Belgrade] PHP Warning:  Undefined variable $terulet_ticket_id in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\ticket.php on line 90
+[11-Feb-2026 10:59:24 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 10:59:24 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 11:00:02 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 11:00:02 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 11:04:25 Europe/Belgrade] PHP Warning:  include(notify_owners.php): Failed to open stream: No such file or directory in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 11:04:25 Europe/Belgrade] PHP Warning:  include(): Failed opening 'notify_owners.php' for inclusion (include_path='.;C:\php\pear') in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 48
+[11-Feb-2026 12:20:02 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:18
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(19): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 18
+[11-Feb-2026 12:20:32 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Class "Auth" not found in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php:16
+Stack trace:
+#0 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php on line 16
+[11-Feb-2026 15:04:31 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:18
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(19): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 18
+[11-Feb-2026 15:06:05 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Class "Auth" not found in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php:16
+Stack trace:
+#0 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php on line 16
+[11-Feb-2026 15:06:39 Europe/Belgrade] PHP Warning:  Undefined variable $auth in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php on line 19
+[11-Feb-2026 15:06:39 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to a member function login() on null in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php:19
+Stack trace:
+#0 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php on line 19
+[11-Feb-2026 15:09:11 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:18
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(19): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 18
+[11-Feb-2026 15:09:21 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:18
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(19): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 18
+[12-Feb-2026 13:27:30 Europe/Belgrade] Redmine DB kapcsolódási hiba: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for 192.168.xx.xx failed: Nincs ilyen ismert állomás
+[12-Feb-2026 13:27:30 Europe/Belgrade] Redmine DB kapcsolódási hiba: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for 192.168.xx.xx failed: Nincs ilyen ismert állomás
+[12-Feb-2026 13:27:30 Europe/Belgrade] Redmine DB kapcsolódási hiba: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for 192.168.xx.xx failed: Nincs ilyen ismert állomás
+[12-Feb-2026 13:27:30 Europe/Belgrade] Redmine DB kapcsolódási hiba: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for 192.168.xx.xx failed: Nincs ilyen ismert állomás
+[12-Feb-2026 13:27:33 Europe/Belgrade] Redmine DB kapcsolódási hiba: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for 192.168.xx.xx failed: Nincs ilyen ismert állomás
+[12-Feb-2026 13:27:33 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:34
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(17): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 34
+[12-Feb-2026 13:27:52 Europe/Belgrade] Redmine DB kapcsolódási hiba: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for 192.168.xx.xx failed: Nincs ilyen ismert állomás
+[12-Feb-2026 13:27:52 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:34
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(17): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 34
+[12-Feb-2026 13:27:54 Europe/Belgrade] Redmine DB kapcsolódási hiba: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for 192.168.xx.xx failed: Nincs ilyen ismert állomás
+[12-Feb-2026 13:27:54 Europe/Belgrade] Redmine DB kapcsolódási hiba: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for 192.168.xx.xx failed: Nincs ilyen ismert állomás
+[12-Feb-2026 13:27:55 Europe/Belgrade] Redmine DB kapcsolódási hiba: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for 192.168.xx.xx failed: Nincs ilyen ismert állomás
+[12-Feb-2026 13:27:55 Europe/Belgrade] Redmine DB kapcsolódási hiba: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for 192.168.xx.xx failed: Nincs ilyen ismert állomás
+[12-Feb-2026 13:28:02 Europe/Belgrade] Redmine DB kapcsolódási hiba: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for 192.168.xx.xx failed: Nincs ilyen ismert állomás
+[12-Feb-2026 13:28:02 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:34
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(17): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 34
+[12-Feb-2026 13:28:04 Europe/Belgrade] Redmine DB kapcsolódási hiba: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for 192.168.xx.xx failed: Nincs ilyen ismert állomás
+[12-Feb-2026 13:28:04 Europe/Belgrade] Redmine DB kapcsolódási hiba: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for 192.168.xx.xx failed: Nincs ilyen ismert állomás
+[12-Feb-2026 13:28:04 Europe/Belgrade] Redmine DB kapcsolódási hiba: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for 192.168.xx.xx failed: Nincs ilyen ismert állomás
+[12-Feb-2026 13:34:18 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:28
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(19): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 28
+[12-Feb-2026 13:34:24 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:28
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(19): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 28
+[12-Feb-2026 13:36:30 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:28
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(32): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 28
+[12-Feb-2026 13:54:41 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:28
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(32): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 28
+[12-Feb-2026 13:55:06 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:28
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(32): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 28
+[12-Feb-2026 13:55:11 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:28
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(32): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 28
+[12-Feb-2026 13:56:16 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:28
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(32): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 28
+[12-Feb-2026 14:31:14 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:28
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(32): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 28
+[12-Feb-2026 14:31:22 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:28
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(32): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 28
+[12-Feb-2026 14:31:26 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:28
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(32): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 28
+[12-Feb-2026 14:31:37 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:28
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(32): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 28
+[12-Feb-2026 14:31:41 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:28
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(32): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 28
+[12-Feb-2026 14:33:00 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:28
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(31): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 28
+[12-Feb-2026 14:33:11 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:28
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(31): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 28
+[12-Feb-2026 14:34:02 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:28
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(31): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 28
+[12-Feb-2026 14:36:34 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:6
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(18): require()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 6
+[12-Feb-2026 14:36:36 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:6
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(18): require()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 6
+[12-Feb-2026 14:37:27 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:6
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(18): require()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 6
+[12-Feb-2026 14:38:18 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_connect() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:6
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(18): require()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 6
+[12-Feb-2026 14:58:50 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 6
+[12-Feb-2026 14:58:50 Europe/Belgrade] PHP Warning:  Undefined variable $ldapconn in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 8
+[12-Feb-2026 14:58:50 Europe/Belgrade] PHP Warning:  Undefined variable $ldapconn in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 9
+[12-Feb-2026 14:58:50 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 6
+[12-Feb-2026 14:58:50 Europe/Belgrade] PHP Warning:  Undefined variable $ldapconn in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 8
+[12-Feb-2026 14:58:50 Europe/Belgrade] PHP Warning:  Undefined variable $ldapconn in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 9
+[12-Feb-2026 14:59:01 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 6
+[12-Feb-2026 14:59:01 Europe/Belgrade] PHP Warning:  Undefined variable $ldapconn in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 8
+[12-Feb-2026 14:59:01 Europe/Belgrade] PHP Warning:  Undefined variable $ldapconn in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 9
+[12-Feb-2026 14:59:01 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Class "Auth" not found in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php:29
+Stack trace:
+#0 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php on line 29
+[12-Feb-2026 14:59:01 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 6
+[12-Feb-2026 14:59:01 Europe/Belgrade] PHP Warning:  Undefined variable $ldapconn in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 8
+[12-Feb-2026 14:59:01 Europe/Belgrade] PHP Warning:  Undefined variable $ldapconn in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 9
+[12-Feb-2026 14:59:38 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 6
+[12-Feb-2026 14:59:38 Europe/Belgrade] PHP Warning:  Undefined variable $ldapconn in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 8
+[12-Feb-2026 14:59:38 Europe/Belgrade] PHP Warning:  Undefined variable $ldapconn in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 9
+[12-Feb-2026 14:59:38 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 6
+[12-Feb-2026 14:59:38 Europe/Belgrade] PHP Warning:  Undefined variable $ldapconn in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 8
+[12-Feb-2026 14:59:38 Europe/Belgrade] PHP Warning:  Undefined variable $ldapconn in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 9
+[12-Feb-2026 15:04:59 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 35
+[12-Feb-2026 15:05:16 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 35
+[12-Feb-2026 15:05:24 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 35
+[12-Feb-2026 15:05:27 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 35
+[12-Feb-2026 15:06:13 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 35
+[12-Feb-2026 15:07:32 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 35
+[12-Feb-2026 15:08:32 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 35
+[12-Feb-2026 16:14:44 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 35
+[12-Feb-2026 16:14:54 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 35
+[12-Feb-2026 16:15:11 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 35
+[12-Feb-2026 16:19:21 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 35
+[12-Feb-2026 16:25:03 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 30
+[12-Feb-2026 16:25:19 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 30
+[13-Feb-2026 08:32:04 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 30
+[13-Feb-2026 08:45:14 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 30
+[13-Feb-2026 08:46:19 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 30
+[13-Feb-2026 08:51:48 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 30
+[13-Feb-2026 08:53:43 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 30
+[13-Feb-2026 08:57:43 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 30
+[13-Feb-2026 09:21:20 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 30
+[13-Feb-2026 13:00:04 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 30
+[13-Feb-2026 13:19:32 Europe/Belgrade] PHP Warning:  Undefined variable $stmt_db in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 581
+[13-Feb-2026 13:19:32 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to a member function fetch() on null in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php:581
+Stack trace:
+#0 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\index.php on line 581
+[13-Feb-2026 13:36:17 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 30
+[13-Feb-2026 13:43:48 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 30
+[13-Feb-2026 15:16:48 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 30
+[13-Feb-2026 15:17:52 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 30
+[13-Feb-2026 15:20:30 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 30
+[13-Feb-2026 15:20:30 Europe/Belgrade] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'field list'
+[16-Feb-2026 08:21:46 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 30
+[17-Feb-2026 10:29:53 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 30
+[17-Feb-2026 10:47:16 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 30
+[18-Feb-2026 09:25:11 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 30
+[18-Feb-2026 09:26:00 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 09:29:28 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 09:30:34 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 09:31:24 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 09:36:35 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 09:44:58 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 09:45:13 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 09:45:25 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 09:45:55 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 09:50:18 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 10:14:35 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 11:02:41 Europe/Belgrade] PHP Warning:  Undefined array key "igenylo_email" in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\ticket.php on line 215
+[18-Feb-2026 11:03:46 Europe/Belgrade] PHP Warning:  Undefined array key "u_email" in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\ticket.php on line 215
+[18-Feb-2026 11:33:01 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 11:33:46 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 11:34:08 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 14:47:36 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 30
+[18-Feb-2026 14:49:48 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function ldap_conn() in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:31
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(30): Auth->login()
+#1 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 14:51:56 Europe/Belgrade] PHP Warning:  Undefined variable $ldapuri in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 14:51:56 Europe/Belgrade] PHP Warning:  Undefined variable $ds in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 35
+[18-Feb-2026 14:51:56 Europe/Belgrade] PHP Warning:  Undefined variable $ds in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 36
+[18-Feb-2026 14:51:56 Europe/Belgrade] PHP Warning:  Undefined variable $ds in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 79
+[18-Feb-2026 14:51:56 Europe/Belgrade] PHP Fatal error:  Uncaught TypeError: ldap_bind(): Argument #1 ($ldap) must be of type LDAP\Connection, null given in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php:39
+Stack trace:
+#0 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php(39): ldap_bind()
+#1 C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\login.php(30): Auth->login()
+#2 {main}
+  thrown in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 14:52:34 Europe/Belgrade] PHP Warning:  Undefined variable $ldapuri in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 14:52:34 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 14:52:38 Europe/Belgrade] LDAP Service Bind Failed: Can't contact LDAP server
+[18-Feb-2026 14:52:38 Europe/Belgrade] Rendszerhiba: Címtár hozzáférés megtagadva.
+[18-Feb-2026 14:54:21 Europe/Belgrade] PHP Warning:  Undefined variable $ldapuri in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 14:54:25 Europe/Belgrade] LDAP Service Bind Failed: Can't contact LDAP server
+[18-Feb-2026 14:54:25 Europe/Belgrade] Rendszerhiba: Címtár hozzáférés megtagadva.
+[18-Feb-2026 14:55:45 Europe/Belgrade] PHP Warning:  Undefined variable $ldapuri in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 14:55:45 Europe/Belgrade] PHP Warning:  Undefined variable $bind_user in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 14:55:45 Europe/Belgrade] PHP Warning:  Undefined variable $bind_pass in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 14:55:49 Europe/Belgrade] PHP Warning:  ldap_bind(): Unable to bind to server: Can't contact LDAP server in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 14:55:49 Europe/Belgrade] LDAP Service Bind Failed: Can't contact LDAP server
+[18-Feb-2026 14:55:49 Europe/Belgrade] Rendszerhiba: Címtár hozzáférés megtagadva.
+[18-Feb-2026 14:56:54 Europe/Belgrade] PHP Warning:  Undefined variable $ldapuri in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 14:56:54 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 14:56:54 Europe/Belgrade] PHP Warning:  Undefined variable $bind_user in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 14:56:54 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 14:56:54 Europe/Belgrade] PHP Warning:  Undefined variable $bind_pass in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 14:56:54 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 14:56:58 Europe/Belgrade] PHP Warning:  ldap_bind(): Unable to bind to server: Can't contact LDAP server in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 14:56:58 Europe/Belgrade] LDAP Service Bind Failed: Can't contact LDAP server
+[18-Feb-2026 14:56:58 Europe/Belgrade] Rendszerhiba: Címtár hozzáférés megtagadva.
+[18-Feb-2026 14:57:49 Europe/Belgrade] PHP Warning:  Undefined variable $ldapuri in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 14:57:49 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 14:57:49 Europe/Belgrade] PHP Warning:  Undefined variable $bind_user in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 14:57:49 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 14:57:49 Europe/Belgrade] PHP Warning:  Undefined variable $bind_pass in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 14:57:49 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 14:57:53 Europe/Belgrade] PHP Warning:  ldap_bind(): Unable to bind to server: Can't contact LDAP server in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 14:57:53 Europe/Belgrade] LDAP Service Bind Failed: Can't contact LDAP server
+[18-Feb-2026 14:57:53 Europe/Belgrade] Rendszerhiba: Címtár hozzáférés megtagadva.
+[18-Feb-2026 14:59:37 Europe/Belgrade] PHP Warning:  Undefined variable $ldapuri in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 14:59:37 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 14:59:37 Europe/Belgrade] PHP Warning:  Undefined variable $bind_user in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 14:59:37 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 14:59:37 Europe/Belgrade] PHP Warning:  Undefined variable $bind_pass in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 14:59:37 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 14:59:41 Europe/Belgrade] PHP Warning:  ldap_bind(): Unable to bind to server: Can't contact LDAP server in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 14:59:41 Europe/Belgrade] LDAP Service Bind Failed: Can't contact LDAP server
+[18-Feb-2026 14:59:41 Europe/Belgrade] Rendszerhiba: Címtár hozzáférés megtagadva.
+[18-Feb-2026 15:00:40 Europe/Belgrade] PHP Warning:  Undefined variable $ldapuri in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 15:00:40 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 15:00:40 Europe/Belgrade] PHP Warning:  Undefined variable $bind_user in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:00:40 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:00:40 Europe/Belgrade] PHP Warning:  Undefined variable $bind_pass in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:00:40 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:00:44 Europe/Belgrade] PHP Warning:  ldap_bind(): Unable to bind to server: Can't contact LDAP server in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:00:44 Europe/Belgrade] LDAP Service Bind Failed: Can't contact LDAP server
+[18-Feb-2026 15:00:44 Europe/Belgrade] Rendszerhiba: Címtár hozzáférés megtagadva.
+[18-Feb-2026 15:00:45 Europe/Belgrade] PHP Warning:  Undefined variable $ldapuri in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 15:00:45 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 15:00:45 Europe/Belgrade] PHP Warning:  Undefined variable $bind_user in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:00:45 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:00:45 Europe/Belgrade] PHP Warning:  Undefined variable $bind_pass in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:00:45 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:00:49 Europe/Belgrade] PHP Warning:  ldap_bind(): Unable to bind to server: Can't contact LDAP server in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:00:49 Europe/Belgrade] LDAP Service Bind Failed: Can't contact LDAP server
+[18-Feb-2026 15:00:49 Europe/Belgrade] Rendszerhiba: Címtár hozzáférés megtagadva.
+[18-Feb-2026 15:03:15 Europe/Belgrade] PHP Warning:  Undefined variable $ldapuri in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 15:03:15 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 15:03:15 Europe/Belgrade] PHP Warning:  Undefined variable $bind_user in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:03:15 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:03:15 Europe/Belgrade] PHP Warning:  Undefined variable $bind_pass in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:03:15 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:03:19 Europe/Belgrade] PHP Warning:  ldap_bind(): Unable to bind to server: Can't contact LDAP server in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:03:19 Europe/Belgrade] LDAP Service Bind Failed: Can't contact LDAP server
+[18-Feb-2026 15:03:19 Europe/Belgrade] Rendszerhiba: Címtár hozzáférés megtagadva.
+[18-Feb-2026 15:04:31 Europe/Belgrade] PHP Warning:  Undefined variable $ldapuri in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 15:04:31 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 15:04:31 Europe/Belgrade] PHP Warning:  Undefined variable $bind_user in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:04:31 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:04:31 Europe/Belgrade] PHP Warning:  Undefined variable $bind_pass in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:04:31 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:04:35 Europe/Belgrade] PHP Warning:  ldap_bind(): Unable to bind to server: Can't contact LDAP server in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:04:35 Europe/Belgrade] LDAP Service Bind Failed: Can't contact LDAP server
+[18-Feb-2026 15:04:35 Europe/Belgrade] Rendszerhiba: Címtár hozzáférés megtagadva.
+[18-Feb-2026 15:07:40 Europe/Belgrade] PHP Warning:  Undefined variable $ldapuri in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 15:07:40 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 31
+[18-Feb-2026 15:07:40 Europe/Belgrade] PHP Warning:  Undefined variable $bind_user in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:07:40 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:07:40 Europe/Belgrade] PHP Warning:  Undefined variable $bind_pass in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:07:40 Europe/Belgrade] PHP Warning:  Undefined property: Auth::$ in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:07:44 Europe/Belgrade] PHP Warning:  ldap_bind(): Unable to bind to server: Can't contact LDAP server in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 39
+[18-Feb-2026 15:07:44 Europe/Belgrade] LDAP Service Bind Failed: Can't contact LDAP server
+[18-Feb-2026 15:07:44 Europe/Belgrade] Rendszerhiba: Címtár hozzáférés megtagadva.
+[19-Feb-2026 09:13:20 Europe/Belgrade] PHP Deprecated:  Usage of ldap_connect with two arguments is deprecated in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 32
+[19-Feb-2026 09:25:33 Europe/Belgrade] PHP Parse error:  syntax error, unexpected token "catch" in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 97
+[19-Feb-2026 09:34:05 Europe/Belgrade] PHP Parse error:  syntax error, unexpected token "private" in C:\Users\evelin.horvat\source\repos\Jogosultsag_igeny\Auth.php on line 169
+[11-Mar-2026 21:29:50 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:29:50 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:29:55 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:30:09 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:30:12 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:30:14 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:30:14 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:30:14 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fs_acces.megosztasok' doesn't exist in C:\xampp\htdocs\Jogosultsag_igeny\index.php:498
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(498): PDO->query('(SELECT 'PM' as...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 498
+[11-Mar-2026 21:30:27 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:31:07 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:31:07 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:31:07 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fs_acces.terulet' doesn't exist in C:\xampp\htdocs\Jogosultsag_igeny\index.php:485
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(485): PDO->query('SELECT terulet_...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 485
+[11-Mar-2026 21:31:09 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:31:13 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:31:13 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:31:13 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fs_acces.terulet' doesn't exist in C:\xampp\htdocs\Jogosultsag_igeny\index.php:485
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(485): PDO->query('SELECT terulet_...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 485
+[11-Mar-2026 21:31:17 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:31:17 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:31:17 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fs_acces.terulet' doesn't exist in C:\xampp\htdocs\Jogosultsag_igeny\index.php:485
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(485): PDO->query('SELECT terulet_...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 485
+[11-Mar-2026 21:36:14 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:36:14 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fs_acces.terulet' doesn't exist in C:\xampp\htdocs\Jogosultsag_igeny\index.php:485
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(485): PDO->query('SELECT terulet_...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 485
+[11-Mar-2026 21:36:18 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:36:20 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:36:20 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:36:20 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fs_acces.terulet' doesn't exist in C:\xampp\htdocs\Jogosultsag_igeny\index.php:485
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(485): PDO->query('SELECT terulet_...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 485
+[11-Mar-2026 21:36:42 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:36:42 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:36:42 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fs_acces.terulet' doesn't exist in C:\xampp\htdocs\Jogosultsag_igeny\index.php:485
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(485): PDO->query('SELECT terulet_...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 485
+[11-Mar-2026 21:43:49 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:43:49 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fs_acces.terulet' doesn't exist in C:\xampp\htdocs\Jogosultsag_igeny\index.php:494
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(494): PDO->query('SELECT terulet_...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 494
+[11-Mar-2026 21:43:51 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:43:52 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:43:52 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:43:52 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fs_acces.terulet' doesn't exist in C:\xampp\htdocs\Jogosultsag_igeny\index.php:494
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(494): PDO->query('SELECT terulet_...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 494
+[11-Mar-2026 21:47:40 Europe/Berlin] PHP Warning:  Undefined variable $port in C:\xampp\htdocs\Jogosultsag_igeny\config.php on line 21
+[11-Mar-2026 21:47:40 Europe/Berlin] Adatbázis csatlakozási hiba: SQLSTATE[HY000] [1049] Unknown database 'fs_access'
+[11-Mar-2026 21:49:06 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'fs_acces.terulet' doesn't exist in C:\xampp\htdocs\Jogosultsag_igeny\index.php:494
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(494): PDO->query('SELECT terulet_...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 494
+[11-Mar-2026 21:49:16 Europe/Berlin] Adatbázis csatlakozási hiba: SQLSTATE[HY000] [1049] Unknown database 'fs_access'
+[11-Mar-2026 21:55:23 Europe/Berlin] Adatbázis csatlakozási hiba: SQLSTATE[HY000] [1049] Unknown database 'fs_access'
+[11-Mar-2026 21:55:24 Europe/Berlin] Adatbázis csatlakozási hiba: SQLSTATE[HY000] [1049] Unknown database 'fs_access'
+[11-Mar-2026 21:56:18 Europe/Berlin] Adatbázis csatlakozási hiba: SQLSTATE[HY000] [1049] Unknown database 'fs_access'
+[11-Mar-2026 21:56:49 Europe/Berlin] Adatbázis csatlakozási hiba: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+[11-Mar-2026 21:56:53 Europe/Berlin] Adatbázis csatlakozási hiba: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+[11-Mar-2026 21:59:00 Europe/Berlin] Adatbázis csatlakozási hiba: SQLSTATE[HY000] [1049] Unknown database 'fs_access'
+[11-Mar-2026 21:59:01 Europe/Berlin] Adatbázis csatlakozási hiba: SQLSTATE[HY000] [1049] Unknown database 'fs_access'
+[11-Mar-2026 21:59:25 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'masodlagos_felelos_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:855
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(855): PDO->query('SELECT megoszta...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 855
+[11-Mar-2026 21:59:35 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1164
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1164): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1164
+[11-Mar-2026 21:59:35 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.masodlagos_felelos_ID' in 'where clause' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1010
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1010): PDO->query('SELECT m.megosz...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1010
+[11-Mar-2026 21:59:37 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1164
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1164): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1164
+[11-Mar-2026 21:59:37 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1164
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1164): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1164
+[11-Mar-2026 21:59:38 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.masodlagos_felelos_ID' in 'where clause' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1010
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1010): PDO->query('SELECT m.megosz...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1010
+[11-Mar-2026 21:59:40 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'masodlagos_felelos_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:855
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(855): PDO->query('SELECT megoszta...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 855
+[11-Mar-2026 22:00:10 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.masodlagos_felelos_ID' in 'where clause' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1010
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1010): PDO->query('SELECT m.megosz...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1010
+[11-Mar-2026 22:00:12 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1164
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1164): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1164
+[11-Mar-2026 22:00:13 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.masodlagos_felelos_ID' in 'where clause' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1010
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1010): PDO->query('SELECT m.megosz...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1010
+[11-Mar-2026 22:01:56 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.masodlagos_felelos_ID' in 'where clause' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1160
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1160): PDO->query('\r\n             ...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1160
+[11-Mar-2026 22:02:03 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1402
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1402): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1402
+[11-Mar-2026 22:02:04 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1402
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1402): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1402
+[11-Mar-2026 22:02:05 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1402
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1402): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1402
+[11-Mar-2026 22:02:06 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1402
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1402): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1402
+[11-Mar-2026 22:04:58 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index1.php:1164
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index1.php(1164): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index1.php on line 1164
+[11-Mar-2026 22:04:58 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index1.php:1164
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index1.php(1164): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index1.php on line 1164
+[11-Mar-2026 22:04:58 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.masodlagos_felelos_ID' in 'where clause' in C:\xampp\htdocs\Jogosultsag_igeny\index1.php:1010
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index1.php(1010): PDO->query('SELECT m.megosz...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index1.php on line 1010
+[11-Mar-2026 22:05:00 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'masodlagos_felelos_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index1.php:855
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index1.php(855): PDO->query('SELECT megoszta...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index1.php on line 855
+[11-Mar-2026 22:08:24 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'masodlagos_felelos_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index1.php:855
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index1.php(855): PDO->query('SELECT megoszta...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index1.php on line 855
+[11-Mar-2026 22:08:26 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.masodlagos_felelos_ID' in 'where clause' in C:\xampp\htdocs\Jogosultsag_igeny\index1.php:1010
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index1.php(1010): PDO->query('SELECT m.megosz...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index1.php on line 1010
+[11-Mar-2026 22:08:27 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index1.php:1164
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index1.php(1164): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index1.php on line 1164
+[11-Mar-2026 22:08:27 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index1.php:1164
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index1.php(1164): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index1.php on line 1164
+[11-Mar-2026 22:08:28 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.masodlagos_felelos_ID' in 'where clause' in C:\xampp\htdocs\Jogosultsag_igeny\index1.php:1010
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index1.php(1010): PDO->query('SELECT m.megosz...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index1.php on line 1010
+[11-Mar-2026 22:08:31 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'masodlagos_felelos_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index1.php:855
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index1.php(855): PDO->query('SELECT megoszta...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index1.php on line 855
+[11-Mar-2026 22:08:31 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.masodlagos_felelos_ID' in 'where clause' in C:\xampp\htdocs\Jogosultsag_igeny\index1.php:1010
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index1.php(1010): PDO->query('SELECT m.megosz...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index1.php on line 1010
+[11-Mar-2026 22:25:01 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.masodlagos_felelos_ID' in 'where clause' in C:\xampp\htdocs\Jogosultsag_igeny\index1.php:1010
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index1.php(1010): PDO->query('SELECT m.megosz...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index1.php on line 1010
+[11-Mar-2026 22:25:02 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index1.php:1164
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index1.php(1164): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index1.php on line 1164
+[11-Mar-2026 22:25:03 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.masodlagos_felelos_ID' in 'where clause' in C:\xampp\htdocs\Jogosultsag_igeny\index1.php:1010
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index1.php(1010): PDO->query('SELECT m.megosz...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index1.php on line 1010
+[11-Mar-2026 22:25:04 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index1.php:1164
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index1.php(1164): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index1.php on line 1164
+[11-Mar-2026 22:25:06 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'masodlagos_felelos_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index1.php:855
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index1.php(855): PDO->query('SELECT megoszta...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index1.php on line 855
+[11-Mar-2026 22:31:15 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index1.php:1164
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index1.php(1164): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index1.php on line 1164
+[11-Mar-2026 22:31:16 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index1.php:1164
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index1.php(1164): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index1.php on line 1164
+[11-Mar-2026 22:31:16 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.masodlagos_felelos_ID' in 'where clause' in C:\xampp\htdocs\Jogosultsag_igeny\index1.php:1010
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index1.php(1010): PDO->query('SELECT m.megosz...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index1.php on line 1010
+[11-Mar-2026 22:37:53 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.masodlagos_felelos_ID' in 'where clause' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1100
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1100): PDO->query('\r\n             ...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1100
+[11-Mar-2026 22:37:54 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1276
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1276): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1276
+[11-Mar-2026 22:37:58 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.masodlagos_felelos_ID' in 'where clause' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1100
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1100): PDO->query('\r\n             ...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1100
+[12-Mar-2026 21:38:36 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1276
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1276): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1276
+[12-Mar-2026 21:38:37 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1276
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1276): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1276
+[12-Mar-2026 21:38:37 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.masodlagos_felelos_ID' in 'where clause' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1100
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1100): PDO->query('\r\n             ...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1100
+[12-Mar-2026 21:38:38 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'igenylo_jog' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:720
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(720): PDO->query('\r\n             ...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 720
+[12-Mar-2026 21:38:38 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'masodlagos_felelos_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:917
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(917): PDO->query('SELECT megoszta...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 917
+[14-Mar-2026 20:07:22 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.masodlagos_felelos_ID' in 'where clause' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1100
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1100): PDO->query('\r\n             ...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1100
+[14-Mar-2026 20:07:24 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1276
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1276): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1276
+[14-Mar-2026 20:07:26 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1276
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1276): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1276
+[14-Mar-2026 20:07:26 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1276
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1276): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1276
+[14-Mar-2026 20:07:28 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1276
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1276): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1276
+[14-Mar-2026 20:07:39 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.masodlagos_felelos_ID' in 'where clause' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1100
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1100): PDO->query('\r\n             ...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1100
+[14-Mar-2026 20:07:39 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1276
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1276): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1276
+[14-Mar-2026 20:12:07 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.admin_comment' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\ticket.php:35
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\ticket.php(35): PDO->query('SELECT b.birala...')
+#1 C:\xampp\htdocs\Jogosultsag_igeny\index.php(150): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\ticket.php on line 35
+[14-Mar-2026 20:12:09 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1276
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1276): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1276
+[14-Mar-2026 20:12:16 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.admin_comment' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\ticket.php:35
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\ticket.php(35): PDO->query('SELECT b.birala...')
+#1 C:\xampp\htdocs\Jogosultsag_igeny\index.php(150): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\ticket.php on line 35
+[14-Mar-2026 20:43:58 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1276
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1276): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1276
+[14-Mar-2026 20:43:59 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1276
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1276): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1276
+[14-Mar-2026 20:44:00 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.masodlagos_felelos_ID' in 'where clause' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1100
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1100): PDO->query('\r\n             ...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1100
+[14-Mar-2026 20:44:03 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.masodlagos_felelos_ID' in 'where clause' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1100
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1100): PDO->query('\r\n             ...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1100
+[14-Mar-2026 20:44:04 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'igenylo_jog' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:720
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(720): PDO->query('\r\n             ...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 720
+[14-Mar-2026 20:44:06 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'igenylo_jog' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:720
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(720): PDO->query('\r\n             ...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 720
+[14-Mar-2026 20:44:08 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'masodlagos_felelos_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:917
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(917): PDO->query('SELECT megoszta...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 917
+[14-Mar-2026 20:44:26 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'igenylo_jog' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:720
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(720): PDO->query('\r\n             ...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 720
+[14-Mar-2026 20:44:27 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'masodlagos_felelos_ID' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:917
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(917): PDO->query('SELECT megoszta...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 917
+[14-Mar-2026 20:53:55 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.admin_comment' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\ticket.php:35
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\ticket.php(35): PDO->query('SELECT b.birala...')
+#1 C:\xampp\htdocs\Jogosultsag_igeny\index.php(151): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\ticket.php on line 35
+[15-Mar-2026 02:58:30 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'igenylo_jog' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:721
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(721): PDO->query('\r\n             ...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 721
+[15-Mar-2026 02:59:10 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_id' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1277
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1277): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1277
+[15-Mar-2026 02:59:11 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'k.kerelem_id' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:1277
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(1277): PDO->query('SELECT * FROM (...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 1277
+[15-Mar-2026 02:59:16 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'igenylo_jog' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:721
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(721): PDO->query('\r\n             ...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 721
+[15-Mar-2026 02:59:18 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'igenylo_jog' in 'field list' in C:\xampp\htdocs\Jogosultsag_igeny\index.php:721
+Stack trace:
+#0 C:\xampp\htdocs\Jogosultsag_igeny\index.php(721): PDO->query('\r\n             ...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Jogosultsag_igeny\index.php on line 721
+[03-May-2026 20:58:26 Europe/Berlin] PHP Warning:  session_start(): open(C:\xampp\tmp\sess_r7mt7qjl0og8b2jgd7vl6tva0u, O_RDWR) failed: Permission denied (13) in C:\Users\Teszt\Desktop\Jogosultsag_igeny 2\Jogosultsag_igeny\config.php on line 10
+[03-May-2026 20:58:26 Europe/Berlin] PHP Warning:  session_start(): Failed to read session data: files (path: C:\xampp\tmp) in C:\Users\Teszt\Desktop\Jogosultsag_igeny 2\Jogosultsag_igeny\config.php on line 10
+[03-May-2026 20:58:30 Europe/Berlin] Adatbázis csatlakozási hiba: SQLSTATE[HY000] [2002] Nem hozható létre kapcsolat, mert a célszámítógép már visszautasította a kapcsolatot
+[03-May-2026 21:28:03 Europe/Berlin] PHP Warning:  session_start(): open(C:\xampp\tmp\sess_5d5m711n3eo85ra5fqk0p6t8g4, O_RDWR) failed: Permission denied (13) in C:\Users\Teszt\Desktop\Jogosultsag_igeny 2\Jogosultsag_igeny\config.php on line 10
+[03-May-2026 21:28:03 Europe/Berlin] PHP Warning:  session_start(): Failed to read session data: files (path: C:\xampp\tmp) in C:\Users\Teszt\Desktop\Jogosultsag_igeny 2\Jogosultsag_igeny\config.php on line 10
+[03-May-2026 21:28:03 Europe/Berlin] Adatbázis csatlakozási hiba: SQLSTATE[HY000] [1045] Access denied for user 'demo'@'localhost' (using password: YES)
+[03-May-2026 21:29:14 Europe/Berlin] PHP Warning:  Undefined array key "REQUEST_METHOD" in C:\Users\Teszt\Desktop\Jogosultsag_igeny 2\Jogosultsag_igeny\index.php on line 88
