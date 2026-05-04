@@ -1,18 +1,13 @@
 <?php
-/**
- * alap jelszo: AlapJelszo123
- * FS Access Portal - BIZTONSÁGOS ÉS JAVÍTOTT INDEX.PHP
- * Hibakeresés bekapcsolva, dinamikus jogosultság lekérés, jelszó hashelés,
- * ÉS a PM/DO cégek teljes szétválasztásának megtartása, + Fatal Error védelem.
- */
 
 // --- HIBAKERESÉS BEKAPCSOLÁSA ---
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+ini_set('default_charset', 'UTF-8');
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+if (!headers_sent()) {
+    header('Content-Type: text/html; charset=UTF-8');
 }
 
 require 'config.php';
@@ -208,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
 
                 $admin_note = isset($comments[$id]) ? trim($comments[$id]) : null;
 
-                $pdo->prepare("INSERT INTO Biralat (kerelem_id, admin_id, rendszer, dontes, admin_comment, datum, email_sent) VALUES (?,?,?,?,?,NOW(), 0)")
+                $pdo->prepare("INSERT INTO biralat (kerelem_id, admin_id, rendszer, dontes, admin_comment, datum, email_sent) VALUES (?,?,?,?,?,NOW(), 0)")
                         ->execute([$id, $my_user_id, $src, $action, $admin_note]);
 
                 $processed_requests[] = [
@@ -423,7 +418,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
                         $stmt = $pdo->prepare("UPDATE $tbl_req SET status = 'revoke' WHERE kerelem_id = ?");
                         $stmt->execute([$req_id]);
 
-                        $pdo->prepare("INSERT INTO Biralat (kerelem_id, admin_id, rendszer, dontes, admin_comment, datum, email_sent) VALUES (?, ?, ?, 'review_revoke', 'Időszakos felülvizsgálat során megvonva', NOW(), 0)")
+                        $pdo->prepare("INSERT INTO biralat (kerelem_id, admin_id, rendszer, dontes, admin_comment, datum, email_sent) VALUES (?, ?, ?, 'review_revoke', 'Időszakos felülvizsgálat során megvonva', NOW(), 0)")
                                 ->execute([$req_id, $my_user_id, $rev_sys]);
 
                         $revoked_ids_for_ticket[] = $req_id . '|' . $rev_sys;
@@ -513,10 +508,10 @@ $all_areas = ['PM' => [], 'DO' => []];
 $all_users = ['PM' => [], 'DO' => []];
 
 if (strtolower($role) === 'it_admin') {
-    $stmt1 = $pdo->query("SELECT terulet_id, terulet_nev FROM Terulet ORDER BY terulet_nev");
+    $stmt1 = $pdo->query("SELECT terulet_id, terulet_nev FROM terulet ORDER BY terulet_nev");
     if($stmt1) $all_areas['PM'] = $stmt1->fetchAll();
 
-    $stmt2 = $pdo->query("SELECT terulet_id, terulet_nev FROM Terulet_DO ORDER BY terulet_nev");
+    $stmt2 = $pdo->query("SELECT terulet_id, terulet_nev FROM terulet_do ORDER BY terulet_nev");
     if($stmt2) $all_areas['DO'] = $stmt2->fetchAll();
 
     $stmt3 = $pdo->query("SELECT igenylo_id, igenylo_nev, terulet_id FROM igenylo ORDER BY igenylo_nev");
@@ -528,9 +523,9 @@ if (strtolower($role) === 'it_admin') {
 
 // --- MAPPA STRUKTÚRA BETÖLTÉSE ---
 $folders_by_dept = [];
-$stmt = $pdo->query("(SELECT 'PM' as src, t.terulet_nev, m.megosztas_neve, m.megosztas_id FROM megosztasok m JOIN Terulet t ON m.terulet_id = t.terulet_id)
+$stmt = $pdo->query("(SELECT 'PM' as src, t.terulet_nev, m.megosztas_neve, m.megosztas_id FROM megosztasok m JOIN terulet t ON m.terulet_id = t.terulet_id)
                       UNION ALL
-                      (SELECT 'DO' as src, t.terulet_nev, m.megosztas_neve, m.megosztas_id FROM megosztasok_do m JOIN Terulet_DO t ON m.terulet_id = t.terulet_id)");
+                      (SELECT 'DO' as src, t.terulet_nev, m.megosztas_neve, m.megosztas_id FROM megosztasok_do m JOIN terulet_do t ON m.terulet_id = t.terulet_id)");
 
 if ($stmt) {
     while ($r = $stmt->fetch()) {
@@ -566,68 +561,7 @@ if ($stmt) {
     <title>FS Access Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="mage/png" href="FSAA.jpg">
-    <style>
-        :root { --primary: #003C71; --accent: #EF3340; --bg: #F3F4F6; --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-        body { font-family: 'Inter', sans-serif; margin: 0; display: flex; height: 100vh; background: var(--bg); color: #111827; }
-
-        .sidebar { width: 280px; background: var(--primary); color: white; display: flex; flex-direction: column; flex-shrink: 0; height: 100vh; overflow-y: auto; }
-        .sidebar-header { padding: 30px 20px; background: rgba(0,0,0,0.2); border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .sidebar nav { padding: 20px 0; flex-grow: 1; }
-        .sidebar a { padding: 14px 25px; color: #D1D5DB; text-decoration: none; display: flex; align-items: center; transition: 0.2s; font-weight: 500; border-left: 4px solid transparent; }
-        .sidebar a:hover { background: rgba(255,255,255,0.1); color: white; }
-        .sidebar a.active { background: rgba(255,255,255,0.1); color: white; border-left-color: var(--accent); }
-
-        .main { flex: 1; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
-        .top-bar { background: white; padding: 0 40px; height: 70px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--accent); flex-shrink: 0; }
-        .content { padding: 40px; overflow-y: auto; flex: 1; }
-
-        .logout-btn { color: var(--accent); font-weight: 600; text-decoration: none; padding: 8px 18px; border: 2px solid var(--accent); border-radius: 6px; transition: 0.2s; }
-        .logout-btn:hover { background: var(--accent); color: white; }
-
-        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: var(--card-shadow); margin-bottom: 25px; }
-
-        .table-wrapper { overflow-x: auto; border-radius: 8px; border: 1px solid #E5E7EB; }
-        table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 1000px; }
-        th { text-align: left; padding: 16px; background: #F9FAFB; color: #6B7280; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; border-bottom: 1px solid #E5E7EB; white-space: nowrap; }
-        td { padding: 12px 16px; border-bottom: 1px solid #F3F4F6; font-size: 0.95rem; vertical-align: middle; }
-
-        .col-nowrap { white-space: nowrap; }
-        .col-reason { min-width: 200px; max-width: 350px; white-space: normal; font-style: italic; color: #555; line-height: 1.4; }
-
-        .status-badge { padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; display: inline-block; text-transform: uppercase; }
-        .st-pending { background: #FEF3C7; color: #92400E; }
-        .st-accepted { background: #D1FAE5; color: #065F46; }
-        .st-rejected { background: #FEE2E2; color: #991B1B; }
-        .st-revoke { background: #F3F4F6; color: #374151; }
-
-        label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem; color: #4B5563; }
-
-        select, input[type="text"] { width: 100%; height: 46px; padding: 0 12px; border: 1px solid #D1D5DB; border-radius: 8px; font-size: 0.95rem; margin-bottom: 20px; box-sizing: border-box; }
-        input[type="text"].search-input { margin: 0; flex: 1; }
-
-        .folder-list { border: 1px solid #E5E7EB; border-radius: 8px; background: #F9FAFB; max-height: 350px; overflow-y: auto; margin-bottom: 20px; }
-        .folder-row { display: flex; align-items: center; padding: 12px 15px; border-bottom: 1px solid #E5E7EB; background: white; }
-
-        .btn { height: 46px; padding: 0 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; white-space: nowrap; box-sizing: border-box; }
-        .btn-green { background: #10B981 !important; color: white !important; }
-        .btn-red { background: #EF4444 !important; color: white !important; }
-        .btn-blue { background: #3B82F6 !important; color: white !important; }
-
-        .msg-box { padding: 15px; border-radius: 8px; margin-bottom: 20px; font-weight: 600; }
-        .msg-success { background: #D1FAE5; color: #065F46; border: 1px solid #A7F3D0; }
-        .msg-error { background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
-        .msg-warning { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
-
-        .search-container { display: flex; gap: 10px; margin-bottom: 20px; align-items: center; width: 100%; }
-        .search-btn { background: #374151; color: white; border: none; height: 46px; padding: 0 20px; border-radius: 8px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; }
-
-        optgroup { font-weight: 700; color: #003C71; background-color: #F3F4F6; }
-        optgroup option { font-weight: 400; color: #111827; background-color: white; }
-        .logo-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; padding: 0 10px; height: 60px;}
-        .logo-container .logo-wrapper { flex: 1; display: flex; justify-content: center; align-items: center;}
-        .logo-pm { height: 38px; width: auto;}
-        .logo-do { height: 46px; width: auto;}
-    </style>
+    <link rel="stylesheet" href="old_index_style.css">
 </head>
 <body>
 <div class="sidebar">
@@ -1257,13 +1191,13 @@ if ($stmt) {
 
                             $q = "SELECT * FROM ( 
                                         (SELECT k.kerelem_id, k.status, k.indoklas, k.kerelem_datum, i.igenylo_nev, m.megosztas_neve, k.hozzaferes_tipusa, 'PM' as src, m.felelos_id as f1, m.masodlagos_felelos_id as f2,
-                                            (SELECT COALESCE(u1.igenylo_nev, u2.igenylo_nev) FROM Biralat b LEFT JOIN igenylo u1 ON b.admin_id = u1.igenylo_id LEFT JOIN igenylok_do u2 ON b.admin_id = u2.igenylo_id WHERE b.kerelem_id = k.kerelem_id AND b.rendszer = 'PM' ORDER BY b.datum DESC LIMIT 1) as jovahagyo_nev,
-                                            (SELECT admin_comment FROM Biralat b WHERE b.kerelem_id = k.kerelem_id AND b.rendszer = 'PM' ORDER BY b.datum DESC LIMIT 1) as admin_megjegyzes
+                                            (SELECT COALESCE(u1.igenylo_nev, u2.igenylo_nev) FROM biralat b LEFT JOIN igenylo u1 ON b.admin_id = u1.igenylo_id LEFT JOIN igenylok_do u2 ON b.admin_id = u2.igenylo_id WHERE b.kerelem_id = k.kerelem_id AND b.rendszer = 'PM' ORDER BY b.datum DESC LIMIT 1) as jovahagyo_nev,
+                                            (SELECT admin_comment FROM biralat b WHERE b.kerelem_id = k.kerelem_id AND b.rendszer = 'PM' ORDER BY b.datum DESC LIMIT 1) as admin_megjegyzes
                                         FROM kerelem k JOIN igenylo i ON k.igenylo_id=i.igenylo_id JOIN megosztasok m ON k.megosztas_id=m.megosztas_id) 
                                         UNION ALL 
                                         (SELECT k.kerelem_id, k.status, k.indoklas, k.kerelem_datum, i.igenylo_nev, m.megosztas_neve, k.hozzaferes_tipusa, 'DO' as src, m.felelos_id as f1, m.masodlagos_felelos_id as f2,
-                                            (SELECT COALESCE(u1.igenylo_nev, u2.igenylo_nev) FROM Biralat b LEFT JOIN igenylo u1 ON b.admin_id = u1.igenylo_id LEFT JOIN igenylok_do u2 ON b.admin_id = u2.igenylo_id WHERE b.kerelem_id = k.kerelem_id AND b.rendszer = 'DO' ORDER BY b.datum DESC LIMIT 1) as jovahagyo_nev,
-                                            (SELECT admin_comment FROM Biralat b WHERE b.kerelem_id = k.kerelem_id AND b.rendszer = 'DO' ORDER BY b.datum DESC LIMIT 1) as admin_megjegyzes
+                                            (SELECT COALESCE(u1.igenylo_nev, u2.igenylo_nev) FROM biralat b LEFT JOIN igenylo u1 ON b.admin_id = u1.igenylo_id LEFT JOIN igenylok_do u2 ON b.admin_id = u2.igenylo_id WHERE b.kerelem_id = k.kerelem_id AND b.rendszer = 'DO' ORDER BY b.datum DESC LIMIT 1) as jovahagyo_nev,
+                                            (SELECT admin_comment FROM biralat b WHERE b.kerelem_id = k.kerelem_id AND b.rendszer = 'DO' ORDER BY b.datum DESC LIMIT 1) as admin_megjegyzes
                                         FROM kerelem_do k JOIN igenylok_do i ON k.igenylo_id=i.igenylo_id JOIN megosztasok_do m ON k.megosztas_id=m.megosztas_id) 
                                     ) as t WHERE $st_filter";
 

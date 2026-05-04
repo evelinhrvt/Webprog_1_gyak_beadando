@@ -2,13 +2,18 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+ini_set('default_charset', 'UTF-8');
+
+if (!headers_sent()) {
+    header('Content-Type: text/html; charset=UTF-8');
+}
 
 require 'config.php';
 
 if (isset($_GET['logout'])) {
     session_unset();
     session_destroy();
-    header('Location: index.php');
+    header('Location: index_old.php');
     exit;
 }
 
@@ -41,7 +46,7 @@ function ensureBeadandoTables(PDO $pdo)
             email VARCHAR(180) NOT NULL,
             targy VARCHAR(180) NOT NULL,
             uzenet TEXT NOT NULL,
-            bekuldo VARCHAR(120) NOT NULL DEFAULT 'Vendég',
+            bekuldo VARCHAR(120) NOT NULL DEFAULT 'Vend&eacute;g',
             kuldes_ideje DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
     ");
@@ -74,7 +79,7 @@ function fetchFolders(PDO $pdo)
 
 function redirectTo($page)
 {
-    header('Location: index.php?page=' . urlencode($page));
+    header('Location: index_old.php?page=' . urlencode($page));
     exit;
 }
 
@@ -95,29 +100,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $uzenet = trim($_POST['uzenet'] ?? '');
 
         if (strlen($nev) < 3) {
-            $contactErrors[] = 'A név legalább 3 karakter legyen.';
+            $contactErrors[] = 'A n&eacute;v legal&aacute;bb 3 karakter legyen.';
         }
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $contactErrors[] = 'Érvényes e-mail címet adj meg.';
+            $contactErrors[] = '&Eacute;rv&eacute;nyes e-mail c&iacute;met adj meg.';
         }
         if (strlen($targy) < 3) {
-            $contactErrors[] = 'A tárgy legalább 3 karakter legyen.';
+            $contactErrors[] = 'A t&aacute;rgy legal&aacute;bb 3 karakter legyen.';
         }
         if (strlen($uzenet) < 10) {
-            $contactErrors[] = 'Az üzenet legalább 10 karakter legyen.';
+            $contactErrors[] = 'Az &uuml;zenet legal&aacute;bb 10 karakter legyen.';
         }
 
         if (!$contactErrors) {
-            $sender = $isLoggedIn ? $fullName : 'Vendég';
+            $sender = $isLoggedIn ? $fullName : 'Vend&eacute;g';
             $stmt = $pdo->prepare("INSERT INTO kapcsolat_uzenetek (nev, email, targy, uzenet, bekuldo) VALUES (?, ?, ?, ?, ?)");
             $stmt->execute([$nev, $email, $targy, $uzenet, $sender]);
             $page = 'kapcsolat_elkuldve';
             $contactResult = [
-                    'nev' => $nev,
-                    'email' => $email,
-                    'targy' => $targy,
-                    'uzenet' => $uzenet,
-                    'bekuldo' => $sender,
+                'nev' => $nev,
+                'email' => $email,
+                'targy' => $targy,
+                'uzenet' => $uzenet,
+                'bekuldo' => $sender,
             ];
         } else {
             $page = 'kapcsolat';
@@ -132,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (!isset($_FILES['kep']) || $_FILES['kep']['error'] !== UPLOAD_ERR_OK) {
-            $notice = 'Nem sikerült a képfeltöltés.';
+            $notice = 'Nem siker&uuml;lt a k&eacute;pfelt&ouml;lt&eacute;s.';
             $noticeType = 'error';
             $page = 'kepek';
         } else {
@@ -141,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mime = mime_content_type($tmpPath);
 
             if (!isset($allowedTypes[$mime])) {
-                $notice = 'Csak JPG, PNG, WEBP vagy GIF képet lehet feltölteni.';
+                $notice = 'Csak JPG, PNG, WEBP vagy GIF k&eacute;pet lehet felt&ouml;lteni.';
                 $noticeType = 'error';
                 $page = 'kepek';
             } else {
@@ -158,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     redirectTo('kepek');
                 }
 
-                $notice = 'A kép mentése nem sikerült.';
+                $notice = 'A k&eacute;p ment&eacute;se nem siker&uuml;lt.';
                 $noticeType = 'error';
                 $page = 'kepek';
             }
@@ -186,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $masodlagos = (int) ($_POST['masodlagos_felelos'] ?? 0);
 
         if ($nev === '' || $terulet <= 0 || $felelos <= 0) {
-            $notice = 'A név, terület és felelős mező kitöltése kötelező.';
+            $notice = 'A n&eacute;v, ter&uuml;let &eacute;s felel&#337;s mez&#337; kit&ouml;lt&eacute;se k&ouml;telez&#337;.';
             $noticeType = 'error';
             $page = 'crud';
         } elseif ($action === 'crud_create') {
@@ -211,7 +216,7 @@ $folders = $page === 'crud' ? fetchFolders($pdo) : [];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FS Access Portal beadandó</title>
+    <title>FS Access Portal beadand&oacute;</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -221,16 +226,16 @@ $folders = $page === 'crud' ? fetchFolders($pdo) : [];
             <img src="pm_logo.png" alt="Phoenix Mecano">
             <strong>FS Access Portal</strong>
         </div>
-        <nav aria-label="Főmenü">
-            <a href="index.php?page=fooldal" class="<?= $page === 'fooldal' ? 'active' : '' ?>">Főoldal</a>
-            <a href="index.php?page=kepek" class="<?= $page === 'kepek' ? 'active' : '' ?>">Képek</a>
+        <nav aria-label="F&#337;men&uuml;">
+            <a href="index.php?page=fooldal" class="<?= $page === 'fooldal' ? 'active' : '' ?>">F&#337;oldal</a>
+            <a href="index.php?page=kepek" class="<?= $page === 'kepek' ? 'active' : '' ?>">K&eacute;pek</a>
             <a href="index.php?page=kapcsolat" class="<?= in_array($page, ['kapcsolat', 'kapcsolat_elkuldve'], true) ? 'active' : '' ?>">Kapcsolat</a>
             <a href="index.php?page=crud" class="<?= $page === 'crud' ? 'active' : '' ?>">CRUD</a>
             <?php if ($isLoggedIn): ?>
-                <a href="index.php?page=uzenetek" class="<?= $page === 'uzenetek' ? 'active' : '' ?>">Üzenetek</a>
-                <a href="index.php?logout=1">Kilépés</a>
+                <a href="index.php?page=uzenetek" class="<?= $page === 'uzenetek' ? 'active' : '' ?>">&Uuml;zenetek</a>
+                <a href="index.php?logout=1">Kil&eacute;p&eacute;s</a>
             <?php else: ?>
-                <a href="login.php">Bejelentkezés</a>
+                <a href="login.php">Bejelentkez&eacute;s</a>
             <?php endif; ?>
         </nav>
         <div class="userbox">
@@ -238,7 +243,7 @@ $folders = $page === 'crud' ? fetchFolders($pdo) : [];
                 <b>Bejelentkezett:</b>
                 <?= e($fullName) ?> (<?= e($loginName) ?>)
             <?php else: ?>
-                Vendég felhasználó
+                Vend&eacute;g felhaszn&aacute;l&oacute;
             <?php endif; ?>
         </div>
     </div>
@@ -254,13 +259,13 @@ $folders = $page === 'crud' ? fetchFolders($pdo) : [];
             <div>
                 <h1>FS Access Portal</h1>
                 <p class="lead">
-                    Helyi PHP alapú jogosultságigénylő webalkalmazás, amely fájlszerver megosztásokhoz kezeli az igényeket,
-                    a felelősöket és az alapvető adminisztrációs műveleteket.
+                    Helyi PHP alap&uacute; jogosults&aacute;gig&eacute;nyl&#337; webalkalmaz&aacute;s, amely f&aacute;jlszerver megoszt&aacute;sokhoz kezeli az ig&eacute;nyeket,
+                    a felel&#337;s&ouml;ket &eacute;s az alapvet&#337; adminisztr&aacute;ci&oacute;s m&#369;veleteket.
                 </p>
                 <div class="stat-grid">
                     <div class="stat"><strong>PHP</strong> szerveroldal</div>
-                    <div class="stat"><strong>MySQL</strong> adatbázis</div>
-                    <div class="stat"><strong>HTML5</strong> reszponzív felület</div>
+                    <div class="stat"><strong>MySQL</strong> adatb&aacute;zis</div>
+                    <div class="stat"><strong>HTML5</strong> reszponz&iacute;v fel&uuml;let</div>
                 </div>
             </div>
             <aside class="hero-panel">
@@ -269,72 +274,71 @@ $folders = $page === 'crud' ? fetchFolders($pdo) : [];
                     <img src="do_logo.jpg" alt="DewertOkin logo">
                 </div>
                 <p class="muted">
-                    A rendszer célja, hogy átlátható legyen, ki milyen megosztáshoz kér hozzáférést,
-                    és a felelősök gyorsan tudjanak dönteni.
+                    A rendszer c&eacute;lja, hogy &aacute;tl&aacute;that&oacute; legyen, ki milyen megoszt&aacute;shoz k&eacute;r hozz&aacute;f&eacute;r&eacute;st,
+                    &eacute;s a felel&#337;s&ouml;k gyorsan tudjanak d&ouml;nteni.
                 </p>
             </aside>
         </section>
 
         <section class="section grid-3">
-            <a href="index_old.php" class="card-link">
-                <article class="card">
-                    <h3>Igénylés</h3>
-                    <p>A felhasználó kiválasztja a szükséges megosztást, megadja az indoklást, majd az igény bekerül az adatbázisba.</p>
-                </article>
-            </a>
             <article class="card">
-                <h3>Jóváhagyás</h3>
-                <p>A felelősök és adminisztrátorok külön szerepkör alapján láthatják és kezelhetik a hozzájuk tartozó kérelmeket.</p>
+                <h3>Ig&eacute;nyl&eacute;s</h3>
+                <p>A felhaszn&aacute;l&oacute; kiv&aacute;lasztja a sz&uuml;ks&eacute;ges megoszt&aacute;st...</p>
+                <a class="card-button" href="index_old.php">Ig&eacute;nyl&eacute;s</a>
             </article>
             <article class="card">
-                <h3>Naplózás</h3>
-                <p>A kapcsolati üzenetek, feltöltött képek és CRUD műveletek lokális adatbázissal működnek.</p>
+                <h3>J&oacute;v&aacute;hagy&aacute;s</h3>
+                <p>A felel&#337;s&ouml;k &eacute;s adminisztr&aacute;torok k&uuml;l&ouml;n szerepk&ouml;r alapj&aacute;n l&aacute;thatj&aacute;k &eacute;s kezelhetik a hozz&aacute;juk tartoz&oacute; k&eacute;relmeket.</p>
+            </article>
+            <article class="card">
+                <h3>Napl&oacute;z&aacute;s</h3>
+                <p>A kapcsolati &uuml;zenetek, felt&ouml;lt&ouml;tt k&eacute;pek &eacute;s CRUD m&#369;veletek lok&aacute;lis adatb&aacute;zissal m&#369;k&ouml;dnek.</p>
             </article>
         </section>
 
         <section class="section grid-2">
             <div class="card">
-                <h2>Helyi videó</h2>
+                <h2>Helyi vide&oacute;</h2>
                 <video controls poster="pm_logo.png">
                     <source src="media/helyi-bemutato.mp4" type="video/mp4">
-                    A böngésződ nem támogatja a videó lejátszását.
+                    A b&ouml;ng&eacute;sz&#337;d nem t&aacute;mogatja a vide&oacute; lej&aacute;tsz&aacute;s&aacute;t.
                 </video>
-                <p class="muted">Ide kerül a saját, legfeljebb 5 másodperces videó: <code>media/helyi-bemutato.mp4</code>.</p>
+                <p class="muted">Ide ker&uuml;l a saj&aacute;t, legfeljebb 5 m&aacute;sodperces vide&oacute;: <code>media/helyi-bemutato.mp4</code>.</p>
             </div>
             <div class="card">
-                <h2>Szolgáltatói videó</h2>
-                <iframe src="https://www.youtube.com/embed/R4su6L0zzc0?start=2" title="YouTube bemutató" allowfullscreen></iframe>
+                <h2>Szolg&aacute;ltat&oacute;i vide&oacute;</h2>
+                <iframe src="https://www.youtube.com/embed/R4su6L0zzc0?start=2" title="YouTube bemutat&oacute;" allowfullscreen></iframe>
             </div>
         </section>
 
         <section class="section card">
-            <h2>Google térkép</h2>
+            <h2>Google t&eacute;rk&eacute;p</h2>
             <iframe
-                    src="https://www.google.com/maps?q=Phoenix%20Mecano%20Kecskem%C3%A9t&output=embed"
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                    title="Phoenix Mecano térkép"></iframe>
+                src="https://www.google.com/maps?q=Phoenix%20Mecano%20Kecskem%C3%A9t&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Phoenix Mecano t&eacute;rk&eacute;p"></iframe>
         </section>
     <?php endif; ?>
 
     <?php if ($page === 'kepek'): ?>
         <section class="section">
-            <h1>Képgaléria</h1>
-            <p class="lead">A galéria a projekt képeit jeleníti meg. Új képet csak bejelentkezett felhasználó tölthet fel.</p>
+            <h1>K&eacute;pgal&eacute;ria</h1>
+            <p class="lead">A gal&eacute;ria a projekt k&eacute;peit jelen&iacute;ti meg. &Uacute;j k&eacute;pet csak bejelentkezett felhaszn&aacute;l&oacute; t&ouml;lthet fel.</p>
         </section>
 
         <?php if ($isLoggedIn): ?>
             <section class="card section">
-                <h2>Új kép feltöltése</h2>
+                <h2>&Uacute;j k&eacute;p felt&ouml;lt&eacute;se</h2>
                 <form method="post" enctype="multipart/form-data">
                     <input type="hidden" name="action" value="upload_image">
-                    <label for="kep">Kép kiválasztása</label>
+                    <label for="kep">K&eacute;p kiv&aacute;laszt&aacute;sa</label>
                     <input type="file" id="kep" name="kep" accept="image/jpeg,image/png,image/webp,image/gif">
-                    <button type="submit">Feltöltés</button>
+                    <button type="submit">Felt&ouml;lt&eacute;s</button>
                 </form>
             </section>
         <?php else: ?>
-            <div class="empty section">Képfeltöltéshez be kell jelentkezni.</div>
+            <div class="empty section">K&eacute;pfelt&ouml;lt&eacute;shez be kell jelentkezni.</div>
         <?php endif; ?>
 
         <section class="gallery section">
@@ -348,11 +352,11 @@ $folders = $page === 'crud' ? fetchFolders($pdo) : [];
             <?php else: ?>
                 <figure>
                     <img src="pm_logo.png" alt="Phoenix Mecano">
-                    <figcaption>Alapértelmezett projektkép</figcaption>
+                    <figcaption>Alap&eacute;rtelmezett projektk&eacute;p</figcaption>
                 </figure>
                 <figure>
                     <img src="do_logo.jpg" alt="DewertOkin">
-                    <figcaption>Alapértelmezett projektkép</figcaption>
+                    <figcaption>Alap&eacute;rtelmezett projektk&eacute;p</figcaption>
                 </figure>
             <?php endif; ?>
         </section>
@@ -362,25 +366,25 @@ $folders = $page === 'crud' ? fetchFolders($pdo) : [];
         <section class="section grid-2">
             <div>
                 <h1>Kapcsolat</h1>
-                <p class="lead">Az űrlap kliensoldali JavaScript és szerveroldali PHP ellenőrzést is használ, majd az üzenetet adatbázisba menti.</p>
+                <p class="lead">Az &#369;rlap kliensoldali JavaScript &eacute;s szerveroldali PHP ellen&#337;rz&eacute;st is haszn&aacute;l, majd az &uuml;zenetet adatb&aacute;zisba menti.</p>
             </div>
             <div class="card">
                 <form method="post" id="contactForm" novalidate>
                     <input type="hidden" name="action" value="contact_submit">
-                    <label for="nev">Név</label>
+                    <label for="nev">N&eacute;v</label>
                     <input id="nev" name="nev" value="<?= e($_POST['nev'] ?? '') ?>">
 
                     <label for="email">E-mail</label>
                     <input id="email" name="email" value="<?= e($_POST['email'] ?? '') ?>">
 
-                    <label for="targy">Tárgy</label>
+                    <label for="targy">T&aacute;rgy</label>
                     <input id="targy" name="targy" value="<?= e($_POST['targy'] ?? '') ?>">
 
-                    <label for="uzenet">Üzenet</label>
+                    <label for="uzenet">&Uuml;zenet</label>
                     <textarea id="uzenet" name="uzenet"><?= e($_POST['uzenet'] ?? '') ?></textarea>
 
                     <div id="clientErrors" class="client-error" aria-live="polite"></div>
-                    <button type="submit">Üzenet küldése</button>
+                    <button type="submit">&Uuml;zenet k&uuml;ld&eacute;se</button>
                 </form>
             </div>
         </section>
@@ -388,30 +392,30 @@ $folders = $page === 'crud' ? fetchFolders($pdo) : [];
 
     <?php if ($page === 'kapcsolat_elkuldve' && $contactResult): ?>
         <section class="section card">
-            <h1>Elküldött üzenet</h1>
-            <p><strong>Név:</strong> <?= e($contactResult['nev']) ?></p>
+            <h1>Elk&uuml;ld&ouml;tt &uuml;zenet</h1>
+            <p><strong>N&eacute;v:</strong> <?= e($contactResult['nev']) ?></p>
             <p><strong>E-mail:</strong> <?= e($contactResult['email']) ?></p>
-            <p><strong>Tárgy:</strong> <?= e($contactResult['targy']) ?></p>
-            <p><strong>Beküldő:</strong> <?= e($contactResult['bekuldo']) ?></p>
-            <p><strong>Üzenet:</strong><br><?= nl2br(e($contactResult['uzenet'])) ?></p>
-            <a class="btn secondary" href="index.php?page=kapcsolat">Új üzenet</a>
+            <p><strong>T&aacute;rgy:</strong> <?= e($contactResult['targy']) ?></p>
+            <p><strong>Bek&uuml;ld&#337;:</strong> <?= e($contactResult['bekuldo']) ?></p>
+            <p><strong>&Uuml;zenet:</strong><br><?= nl2br(e($contactResult['uzenet'])) ?></p>
+            <a class="btn secondary" href="index.php?page=kapcsolat">&Uacute;j &uuml;zenet</a>
         </section>
     <?php endif; ?>
 
     <?php if ($page === 'uzenetek'): ?>
         <section class="section">
-            <h1>Üzenetek</h1>
-            <p class="lead">A kapcsolat űrlapon beküldött üzenetek fordított időrendben.</p>
+            <h1>&Uuml;zenetek</h1>
+            <p class="lead">A kapcsolat &#369;rlapon bek&uuml;ld&ouml;tt &uuml;zenetek ford&iacute;tott id&#337;rendben.</p>
             <?php if ($messages): ?>
                 <table>
                     <thead>
                     <tr>
-                        <th>Küldés ideje</th>
-                        <th>Név</th>
+                        <th>K&uuml;ld&eacute;s ideje</th>
+                        <th>N&eacute;v</th>
                         <th>E-mail</th>
-                        <th>Tárgy</th>
-                        <th>Beküldő</th>
-                        <th>Üzenet</th>
+                        <th>T&aacute;rgy</th>
+                        <th>Bek&uuml;ld&#337;</th>
+                        <th>&Uuml;zenet</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -421,50 +425,50 @@ $folders = $page === 'crud' ? fetchFolders($pdo) : [];
                             <td><?= e($message['nev']) ?></td>
                             <td><?= e($message['email']) ?></td>
                             <td><?= e($message['targy']) ?></td>
-                            <td><?= e($message['bekuldo'] ?: 'Vendég') ?></td>
+                            <td><?= e($message['bekuldo'] ?: 'Vend&eacute;g') ?></td>
                             <td><?= nl2br(e($message['uzenet'])) ?></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
                 </table>
             <?php else: ?>
-                <div class="empty">Még nincs kapcsolat üzenet.</div>
+                <div class="empty">M&eacute;g nincs kapcsolat &uuml;zenet.</div>
             <?php endif; ?>
         </section>
     <?php endif; ?>
 
     <?php if ($page === 'crud'): ?>
         <section class="section">
-            <h1>CRUD - megosztások</h1>
-            <p class="lead">Create, Read, Update, Delete műveletek a választott adatbázis <code>megosztasok</code> tábláján.</p>
+            <h1>CRUD - megoszt&aacute;sok</h1>
+            <p class="lead">Create, Read, Update, Delete m&#369;veletek a v&aacute;lasztott adatb&aacute;zis <code>megosztasok</code> t&aacute;bl&aacute;j&aacute;n.</p>
         </section>
 
         <?php if (!$isLoggedIn): ?>
-            <div class="empty">A CRUD műveletek megtekinthetők, de módosításhoz be kell jelentkezni.</div>
+            <div class="empty">A CRUD m&#369;veletek megtekinthet&#337;k, de m&oacute;dos&iacute;t&aacute;shoz be kell jelentkezni.</div>
         <?php endif; ?>
 
         <?php if ($isLoggedIn): ?>
             <section class="card section">
-                <h2>Új megosztás létrehozása</h2>
+                <h2>&Uacute;j megoszt&aacute;s l&eacute;trehoz&aacute;sa</h2>
                 <form method="post" class="crud-row">
                     <input type="hidden" name="action" value="crud_create">
                     <div>
-                        <label>Név</label>
-                        <input name="megosztas_neve" placeholder="Példa_RO">
+                        <label>N&eacute;v</label>
+                        <input name="megosztas_neve" placeholder="P&eacute;lda_RO">
                     </div>
                     <div>
-                        <label>Terület</label>
+                        <label>Ter&uuml;let</label>
                         <input name="terulet_ID" value="1">
                     </div>
                     <div>
-                        <label>Felelős</label>
+                        <label>Felel&#337;s</label>
                         <input name="felelos_ID" value="1">
                     </div>
                     <div>
-                        <label>Másodlagos</label>
+                        <label>M&aacute;sodlagos</label>
                         <input name="masodlagos_felelos" value="0">
                     </div>
-                    <button type="submit">Mentés</button>
+                    <button type="submit">Ment&eacute;s</button>
                 </form>
             </section>
         <?php endif; ?>
@@ -475,12 +479,12 @@ $folders = $page === 'crud' ? fetchFolders($pdo) : [];
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Megosztás neve</th>
-                        <th>Terület</th>
-                        <th>Felelős</th>
-                        <th>Másodlagos felelős</th>
-                        <th>Utolsó ellenőrzés</th>
-                        <?php if ($isLoggedIn): ?><th>Műveletek</th><?php endif; ?>
+                        <th>Megoszt&aacute;s neve</th>
+                        <th>Ter&uuml;let</th>
+                        <th>Felel&#337;s</th>
+                        <th>M&aacute;sodlagos felel&#337;s</th>
+                        <th>Utols&oacute; ellen&#337;rz&eacute;s</th>
+                        <?php if ($isLoggedIn): ?><th>M&#369;veletek</th><?php endif; ?>
                     </tr>
                     </thead>
                     <tbody>
@@ -499,8 +503,8 @@ $folders = $page === 'crud' ? fetchFolders($pdo) : [];
                                 <td><input form="<?= e($rowFormId) ?>" name="masodlagos_felelos" value="<?= e($folder['masodlagos_felelos']) ?>"></td>
                                 <td><?= e($folder['utolso_ellenorzes_datum']) ?></td>
                                 <td>
-                                    <button form="<?= e($rowFormId) ?>" type="submit" name="action" value="crud_update">Módosítás</button>
-                                    <button form="<?= e($rowFormId) ?>" class="danger" type="submit" name="action" value="crud_delete" onclick="return confirm('Biztosan törlöd ezt a rekordot?')">Törlés</button>
+                                    <button form="<?= e($rowFormId) ?>" type="submit" name="action" value="crud_update">M&oacute;dos&iacute;t&aacute;s</button>
+                                    <button form="<?= e($rowFormId) ?>" class="danger" type="submit" name="action" value="crud_delete" onclick="return confirm('Biztosan t&ouml;rl&ouml;d ezt a rekordot?')">T&ouml;rl&eacute;s</button>
                                 </td>
                             <?php else: ?>
                                 <td><?= e($folder['megosztas_ID']) ?></td>
@@ -515,33 +519,33 @@ $folders = $page === 'crud' ? fetchFolders($pdo) : [];
                     </tbody>
                 </table>
             <?php else: ?>
-                <div class="empty">Nincs megjeleníthető megosztás az adatbázisban.</div>
+                <div class="empty">Nincs megjelen&iacute;thet&#337; megoszt&aacute;s az adatb&aacute;zisban.</div>
             <?php endif; ?>
         </section>
     <?php endif; ?>
 </main>
 
 <script>
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function (event) {
-            const nev = document.getElementById('nev').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const targy = document.getElementById('targy').value.trim();
-            const uzenet = document.getElementById('uzenet').value.trim();
-            const errors = [];
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', function (event) {
+        const nev = document.getElementById('nev').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const targy = document.getElementById('targy').value.trim();
+        const uzenet = document.getElementById('uzenet').value.trim();
+        const errors = [];
 
-            if (nev.length < 3) errors.push('A név legalább 3 karakter legyen.');
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push('Érvényes e-mail címet adj meg.');
-            if (targy.length < 3) errors.push('A tárgy legalább 3 karakter legyen.');
-            if (uzenet.length < 10) errors.push('Az üzenet legalább 10 karakter legyen.');
+        if (nev.length < 3) errors.push('A n&eacute;v legal&aacute;bb 3 karakter legyen.');
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push('&Eacute;rv&eacute;nyes e-mail c&iacute;met adj meg.');
+        if (targy.length < 3) errors.push('A t&aacute;rgy legal&aacute;bb 3 karakter legyen.');
+        if (uzenet.length < 10) errors.push('Az &uuml;zenet legal&aacute;bb 10 karakter legyen.');
 
-            document.getElementById('clientErrors').innerHTML = errors.join('<br>');
-            if (errors.length > 0) {
-                event.preventDefault();
-            }
-        });
-    }
+        document.getElementById('clientErrors').innerHTML = errors.join('<br>');
+        if (errors.length > 0) {
+            event.preventDefault();
+        }
+    });
+}
 </script>
 </body>
 </html>

@@ -10,7 +10,9 @@ $sessionPath = __DIR__ . '/sessions';
 if (!is_dir($sessionPath)) {
     mkdir($sessionPath, 0775, true);
 }
-session_save_path($sessionPath);
+if (is_dir($sessionPath) && is_writable($sessionPath)) {
+    session_save_path($sessionPath);
+}
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -19,9 +21,9 @@ if (session_status() === PHP_SESSION_NONE) {
 // 3. Adatbázis hozzáférési adatok
 $host = 'localhost';
 $port = 3306;
-$db = 'fs_acces';
-$user = 'root';
-$pass = '';
+$db = 'aj4b6q';
+$user = 'aj4b6q';
+$pass = 'Gamf1234';
 $charset = 'utf8mb4'; // Támogatja a speciális karaktereket (pl. hosszú ő, ű)
 
 // 4. PDO konfiguráció: Modern és biztonságos adatbázis-kezelés
